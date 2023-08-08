@@ -1,0 +1,19 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+BLUE='\033[1;34m'
+GREEN='\033[1;32m'
+DEFAULT='\033[0m'
+
+echo "${BLUE}> -----------------------------------------------------"
+echo "> Checking for any ESLint and Prettier rule violations"
+echo "> Running command 'npm run lint-staged' ${DEFAULT}"
+npm run lint-staged
+echo "${GREEN}> No errors found"
+echo "${BLUE}> -----------------------------------------------------"
+echo "> Checking for any TypeScript rule violations"
+echo "> Running command 'tsc --noEmit' ${DEFAULT}"
+tsc --noEmit
+
+echo "${GREEN}> No errors found"
+echo "${GREEN}> All checks were successful ${DEFAULT}"
