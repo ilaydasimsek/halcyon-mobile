@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
   },
   button: {
     borderRadius: 30,
-    backgroundColor: colors.electricBlue,
+    backgroundColor: colors.darkPink,
   },
   image: {
     resizeMode: 'contain',

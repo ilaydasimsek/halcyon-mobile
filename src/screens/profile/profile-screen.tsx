@@ -6,7 +6,7 @@ import { colors } from '@style';
 const ProfileScreen = () => {
   return (
     <SafeAreaView style={styles.safeArea}>
-      <Text>Home</Text>
+      <Text>Profile</Text>
     </SafeAreaView>
   );
 };

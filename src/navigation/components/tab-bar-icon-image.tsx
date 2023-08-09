@@ -1,33 +1,20 @@
 import React from 'react';
 import { Image, ImageSourcePropType, StyleSheet } from 'react-native';
+import { colors } from '@style';
 
 type TTabBarIconImageProps = {
   icon: ImageSourcePropType;
-  focused: boolean;
 };
 
-const TabBarIconImage: React.FC<TTabBarIconImageProps> = ({
-  icon,
-  focused,
-}) => {
-  return (
-    <Image
-      source={icon}
-      resizeMode="contain"
-      style={focused ? styles.focusedTabBarItem : styles.unfocusedTabBarItem}
-    />
-  );
+const TabBarIconImage: React.FC<TTabBarIconImageProps> = ({ icon }) => {
+  return <Image source={icon} resizeMode="contain" style={styles.tabBarItem} />;
 };
 
 const styles = StyleSheet.create({
-  focusedTabBarItem: {
-    width: 65,
-    height: 34,
-    borderRadius: 20,
-  },
-  unfocusedTabBarItem: {
+  tabBarItem: {
     width: 25,
     height: 25,
+    tintColor: colors.darkPink,
   },
 });
 

@@ -115,7 +115,7 @@ const LoginScreen: React.FC = () => {
             text={
               <Text style={[typography.p1, fontColor.textGrayH2]}>
                 {localized('notAMember')}
-                <Text style={[{ color: colors.electricBlue }]}>
+                <Text style={[{ color: colors.darkPink }]}>
                   {' '}
                   {localized('registerNow')}
                 </Text>

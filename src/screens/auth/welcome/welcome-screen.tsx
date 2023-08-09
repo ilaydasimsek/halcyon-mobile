@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     paddingVertical: '15%',
   },
   registerButton: {
-    backgroundColor: colors.electricBlue,
+    backgroundColor: colors.darkPink,
     borderWidth: 0,
     marginBottom: 20,
   },

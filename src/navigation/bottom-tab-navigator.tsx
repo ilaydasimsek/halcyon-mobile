@@ -19,15 +19,15 @@ const BOTTOM_TABS: TBottomNavigationItem[] = [
     tabName: 'Home',
     screenName: 'HomeScreen',
     component: HomeScreen,
-    icon: icons.back,
-    focusedIcon: icons.back,
+    icon: icons.home,
+    focusedIcon: icons.homeSelected,
   },
   {
     tabName: 'Profile',
     screenName: 'ProfileScreen',
     component: ProfileScreen,
-    icon: icons.back,
-    focusedIcon: icons.back,
+    icon: icons.profile,
+    focusedIcon: icons.profileSelected,
   },
 ];
 
@@ -44,7 +44,6 @@ const getTabBarIcon = ({ routeName }: TTabBarIcon) => {
       return (
         <TabBarIconImage
           icon={focused ? tabBarItem.focusedIcon : tabBarItem.icon}
-          focused={focused}
         />
       );
     }
