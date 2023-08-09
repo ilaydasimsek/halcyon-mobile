@@ -5,15 +5,24 @@ import { NavigationContainer } from '@react-navigation/native';
 import AppContainer from './src/app-container';
 import store from './src/common/store';
 import { AppNavigator } from '@navigation';
+import { API } from '@constants';
+import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client';
+
+const client = new ApolloClient({
+  uri: API.BASE_URL,
+  cache: new InMemoryCache(),
+});
 
 const App = () => {
   return (
     <NavigationContainer>
-      <Provider store={store}>
-        <AppContainer>
-          <AppNavigator />
-        </AppContainer>
-      </Provider>
+      <ApolloProvider client={client}>
+        <Provider store={store}>
+          <AppContainer>
+            <AppNavigator />
+          </AppContainer>
+        </Provider>
+      </ApolloProvider>
     </NavigationContainer>
   );
 };

@@ -3,7 +3,7 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { colors, fontColor, typography } from '@style';
+import { colors, fontColor } from '@style';
 import { MainButton } from '@components/buttons';
 import { localized } from '@localization';
 
