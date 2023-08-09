@@ -6,7 +6,6 @@ import { useNavigation } from '@react-navigation/native';
 import { colors, fontColor, scale, typography } from '@style';
 import {
   CustomKeyboardAvoidingView,
-  Separator,
   SpinnerOverlay,
 } from '@components/helper-views';
 import { localized } from '@localization';
@@ -104,11 +103,6 @@ const LoginScreen: React.FC = () => {
               style={styles.loginButton}
               disabled={Object.keys(formErrors).length !== 0}
             />
-            <View style={styles.continueWithTitle}>
-              <Separator style={styles.separator} />
-              <Text style={typography.p2}>{localized('orContinueWith')}</Text>
-              <Separator style={styles.separator} />
-            </View>
           </View>
           <TextButton
             onPress={onPressNotAMemberButton}
@@ -151,13 +145,6 @@ const styles = StyleSheet.create({
     borderColor: colors.brightGray,
     marginBottom: scale(17),
   },
-  continueWithTitle: {
-    marginBottom: scale(40),
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection: 'row',
-  },
-  separator: { width: 30, marginHorizontal: 9 },
 });
 
 export default LoginScreen;

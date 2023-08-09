@@ -1,7 +1,6 @@
 const translation = {
   alreadyHaveAnAccount: 'I already have an account',
   signIn: 'Sign in',
-  orContinueWith: 'or continue with',
   notAMember: 'Not a member?',
   registerNow: 'Register now',
   resetPassword: 'Reset Password',
