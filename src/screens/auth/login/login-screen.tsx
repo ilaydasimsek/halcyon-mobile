@@ -10,7 +10,7 @@ import {
 } from '@components/helper-views';
 import { localized } from '@localization';
 import { MainButton, TextButton } from '@components/buttons';
-import { TLoginQuery } from '../auth-query';
+import { TLoginQuery, useLogin } from '../auth-query';
 import LoginSchema from './login-schema';
 
 const LoginScreen: React.FC = () => {
@@ -18,6 +18,7 @@ const LoginScreen: React.FC = () => {
 
   const emailInputRef = useRef<TextInput>(null);
   const passwordInputRef = useRef<TextInput>(null);
+  const [loginMutation] = useLogin();
   const initialValues: TLoginQuery = {
     email: '',
     password: '',
@@ -34,8 +35,8 @@ const LoginScreen: React.FC = () => {
     initialValues: initialValues,
     validateOnChange: true,
     validateOnMount: true,
-    onSubmit: (_) => {
-      console.log('Pressed login button');
+    onSubmit: (request: TLoginQuery) => {
+      loginMutation({ variables: request });
     },
   });
 

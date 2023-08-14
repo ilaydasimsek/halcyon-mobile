@@ -6,9 +6,8 @@ const RegisterSchema = Yup.object().shape({
     .max(255, 'Email can not longer then 255 characters')
     .required('Email can not be empty'),
   password: Yup.string()
-    .min(2, 'Password should be longer than 2 characters')
+    .min(8, 'Password should be longer than 8 characters')
     .required('Password can not be empty'),
-  name: Yup.string().required('Name can not be empty'),
 });
 
 export default RegisterSchema;

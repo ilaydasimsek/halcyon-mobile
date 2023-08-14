@@ -11,15 +11,15 @@ import {
 import { localized } from '@localization';
 import { MainButton, TextButton } from '@components/buttons';
 import RegisterSchema from './register-schema';
-import { TRegisterQuery } from '../auth-query';
+import { useSignUp, TLoginQuery } from '../auth-query';
 
 const RegisterScreen: React.FC = () => {
   const navigation = useNavigation();
   const emailInputRef = useRef<TextInput>(null);
   const passwordInputRef = useRef<TextInput>(null);
   const nameInputRef = useRef<TextInput>(null);
-  const initialValues: TRegisterQuery = {
-    name: '',
+  const [signUp, { error }] = useSignUp();
+  const initialValues: TLoginQuery = {
     email: '',
     password: '',
   };
@@ -35,8 +35,8 @@ const RegisterScreen: React.FC = () => {
     initialValues: initialValues,
     validateOnChange: true,
     validateOnMount: true,
-    onSubmit: (_) => {
-      console.log('Submitted register');
+    onSubmit: (request: TLoginQuery) => {
+      signUp({ variables: request });
     },
   });
 
@@ -62,22 +62,6 @@ const RegisterScreen: React.FC = () => {
       <CustomKeyboardAvoidingView>
         <View style={styles.body}>
           <View>
-            <Text style={styles.textInputTitle}>{localized('name')}</Text>
-            <TextInput
-              onChange={onChangeTextInputField}
-              style={styles.textInput}
-              placeholder={localized('namePlaceholder')}
-              onChangeText={handleChange('name')}
-              onBlur={handleBlur('name')}
-              value={values.name}
-              ref={nameInputRef}
-              returnKeyType="next"
-              blurOnSubmit={false}
-              onSubmitEditing={() => {
-                emailInputRef.current?.focus();
-              }}
-            />
-            <View style={styles.separator} />
             <Text style={styles.textInputTitle}>{localized('email')}</Text>
             <TextInput
               onChange={onChangeTextInputField}
@@ -111,6 +95,7 @@ const RegisterScreen: React.FC = () => {
               autoCapitalize="none"
             />
           </View>
+          <Text>{error?.message}</Text>
           <MainButton
             onPress={onSubmit}
             title={localized('signIn')}
@@ -156,12 +141,6 @@ const styles = StyleSheet.create({
     paddingBottom: scale(5),
     paddingTop: scale(8),
     marginHorizontal: scale(4),
-  },
-  separator: {
-    marginLeft: scale(4),
-    marginBottom: scale(5),
-    marginTop: scale(4),
-    minHeight: scale(15),
   },
   signInButton: {
     marginVertical: scale(18),

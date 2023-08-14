@@ -30,10 +30,10 @@ export const getUserCredentialsFromKeychain =
 export const saveUserCredentialsToKeychain = async (auth: TAuth) => {
   await setGenericPassword(
     JSON.stringify({
-      userId: auth.userId,
+      userId: auth.payload.email,
     }),
     JSON.stringify({
-      accessToken: auth.accessToken,
+      accessToken: auth.token,
     }),
   );
 };
