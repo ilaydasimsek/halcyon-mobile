@@ -10,8 +10,7 @@ const translation = {
   phoneNo: 'Phone No.',
   aboutMe: 'About Me',
   namePlaceholder: 'Your full name',
-  emailPlaceholder: 'Your organization email address',
-  phoneNoPlaceholder: 'Your contact number',
+  emailPlaceholder: 'Your email address',
   alreadyMember: 'Already a member?',
   login: 'Login',
 };
