@@ -7,6 +7,7 @@ import { icons } from '@constants';
 import TabBarIconImage from './components/tab-bar-icon-image';
 import ProfileScreen from '../screens/profile/profile-screen';
 import HomeScreen from '../screens/home/home-screen';
+import { colors } from '@style';
 
 const Tab = createBottomTabNavigator<TRootStackParamList>();
 
@@ -63,7 +64,15 @@ const BottomTabNavigator: React.FC = () => {
           name={tabBarItem.screenName}
           key={tabBarItem.screenName}
           component={tabBarItem.component}
-          options={{ tabBarShowLabel: false, headerShown: false, lazy: true }}
+          options={{
+            tabBarShowLabel: false,
+            lazy: true,
+            headerShadowVisible: false,
+            headerTitle: tabBarItem.tabName,
+            headerStyle: {
+              backgroundColor: colors.backgroundGray,
+            },
+          }}
         />
       ))}
     </Tab.Navigator>

@@ -12,8 +12,8 @@ const TabBarIconImage: React.FC<TTabBarIconImageProps> = ({ icon }) => {
 
 const styles = StyleSheet.create({
   tabBarItem: {
-    width: 25,
-    height: 25,
+    width: 22,
+    height: 22,
     tintColor: colors.darkPink,
   },
 });
