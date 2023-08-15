@@ -7,7 +7,7 @@ import { icons } from '@constants';
 import TabBarIconImage from './components/tab-bar-icon-image';
 import ProfileScreen from '../screens/profile/profile-screen';
 import HomeScreen from '../screens/home/home-screen';
-import { colors } from '@style';
+import { colors, typography } from '@style';
 
 const Tab = createBottomTabNavigator<TRootStackParamList>();
 
@@ -71,6 +71,9 @@ const BottomTabNavigator: React.FC = () => {
             headerTitle: tabBarItem.tabName,
             headerStyle: {
               backgroundColor: colors.backgroundGray,
+            },
+            headerTitleStyle: {
+              ...typography.h5,
             },
           }}
         />

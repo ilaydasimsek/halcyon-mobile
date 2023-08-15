@@ -16,6 +16,7 @@ import MeditationPracticesScreen from '../../meditation-practices/meditation-pra
 import YogaLessonsScreen from '../../yoga-lessons/yoga-lessons-screen';
 import { TRootStackParamList, TNavigationItem } from '@navigation';
 import TopTabNavigationItem from './components/top-tab-navigation-item';
+import { colors } from '@style';
 
 const Tab = createMaterialTopTabNavigator<TRootStackParamList>();
 
@@ -111,6 +112,8 @@ const HomeScreenTabNavigator: React.FC = () => {
 const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
+    paddingHorizontal: 10,
+    backgroundColor: colors.backgroundGray,
   },
 });
 

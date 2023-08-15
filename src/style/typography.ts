@@ -46,7 +46,7 @@ export const typography = StyleSheet.create({
     ...fontColor.textGray,
   },
   h5: {
-    fontSize: rem(18),
+    fontSize: rem(16),
     fontFamily: FONT_FAMILY.poppinsSemiBold,
     ...fontColor.textGray,
   },
