@@ -26,30 +26,30 @@ export type YogaPose = {
   sanskrit_name: string;
   description: string;
   difficulty: number;
-  muscle_groups: MuscleGroup[];
+  muscleGroups: MuscleGroup[];
   chakras: Chakra[];
   styles: YogaStyle[];
   categories: YogaCategory[];
-  audio_url: string;
-  image_url: string;
+  audioUrl: string;
+  imageUrl: string;
 };
 
 export type YogaPractice = {
   title: string;
   description: string;
-  benefits_description: string;
-  cover_image_url: string;
-  created_by: string;
-  created_at: Date;
-  yoga_poses: YogaPose[];
+  benefitsDescription: string;
+  coverImageUrl: string;
+  createdBy: string;
+  createdAt: Date;
+  yogaPoses: YogaPose[];
 };
 
 export type YogaChallenge = {
   title: string;
   description: string;
-  benefits_description: string;
-  cover_image_url: string;
-  created_by: string;
-  created_at: Date;
+  benefitsDescription: string;
+  coverImageUrl: string;
+  createdBy: string;
+  createdAt: Date;
   practices: YogaPractice[];
 };

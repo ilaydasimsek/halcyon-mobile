@@ -8,32 +8,34 @@ import { TAuth } from '../screens/auth/auth-query';
 /*
   Parses and returns the saved credentials if there is any
 */
-export const getUserCredentialsFromKeychain =
-  async (): Promise<TAuth | null> => {
-    const credentials = await getGenericPassword();
-    if (!credentials) {
-      return null;
-    }
+export const getUserCredentialsFromKeychain = async (): Promise<{
+  email: string;
+  token: string;
+} | null> => {
+  const credentials = await getGenericPassword();
+  if (!credentials) {
+    return null;
+  }
 
-    return {
-      ...JSON.parse(credentials.username),
-      ...JSON.parse(credentials.password),
-    };
+  return {
+    ...JSON.parse(credentials.username),
+    ...JSON.parse(credentials.password),
   };
+};
 
 /*
   Saves the given auth object to keychain
 
   Warning: react-native-keychain doesn't support saving individual keys.
-  That's why we stringify the userId and username and save them as the username value
+  That's why we stringify email & token and save them as the username value
 */
 export const saveUserCredentialsToKeychain = async (auth: TAuth) => {
   await setGenericPassword(
     JSON.stringify({
-      userId: auth.payload.email,
+      email: auth.payload.email,
     }),
     JSON.stringify({
-      accessToken: auth.token,
+      token: auth.token,
     }),
   );
 };
