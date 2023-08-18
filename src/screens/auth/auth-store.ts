@@ -1,9 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { TAuth } from './auth-query';
 
 type TAuthState = {
   loggedIn?: boolean;
-  user?: TAuth;
+  user?: {
+    email: string;
+    token: string;
+  };
 };
 
 const initialState: TAuthState = {
@@ -15,7 +17,13 @@ const slice = createSlice({
   name: 'auth',
   initialState: initialState,
   reducers: {
-    userLoggedIn: (state: TAuthState, action: PayloadAction<TAuth>) => {
+    userLoggedIn: (
+      state: TAuthState,
+      action: PayloadAction<{
+        email: string;
+        token: string;
+      }>,
+    ) => {
       state.loggedIn = true;
       state.user = action.payload;
     },

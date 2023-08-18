@@ -50,7 +50,12 @@ export const useLogin = () => {
   return useMutation<{ login: TLoginResponse }>(LOGIN_MUTATION, {
     async onCompleted(data) {
       await saveUserCredentialsToKeychain(data.login);
-      dispatch(userLoggedIn(data.login));
+      dispatch(
+        userLoggedIn({
+          email: data.login.payload.email,
+          token: data.login.token,
+        }),
+      );
     },
   });
 };
@@ -60,7 +65,12 @@ export const useSignUp = () => {
   return useMutation<{ signUp: TLoginResponse }>(SIGNUP_MUTATION, {
     async onCompleted(data) {
       await saveUserCredentialsToKeychain(data.signUp);
-      dispatch(userLoggedIn(data.signUp));
+      dispatch(
+        userLoggedIn({
+          email: data.signUp.payload.email,
+          token: data.signUp.token,
+        }),
+      );
     },
   });
 };

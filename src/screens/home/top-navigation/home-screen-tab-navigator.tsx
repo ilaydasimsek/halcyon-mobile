@@ -81,7 +81,11 @@ function HomeScreenTabBar({ state, navigation }: MaterialTopTabBarProps) {
           };
 
           return (
-            <TouchableOpacity onPress={onPress} onLongPress={onLongPress}>
+            <TouchableOpacity
+              key={homeScreenTabs[index].tabName}
+              onPress={onPress}
+              onLongPress={onLongPress}
+            >
               <TopTabNavigationItem
                 selected={isFocused}
                 icon={homeScreenTabs[index].icon}
