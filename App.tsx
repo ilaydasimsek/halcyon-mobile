@@ -6,13 +6,37 @@ import AppContainer from './src/app-container';
 import store from './src/common/store';
 import { AppNavigator } from '@navigation';
 import { API } from '@constants';
-import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client';
+import {
+  ApolloProvider,
+  ApolloClient,
+  InMemoryCache,
+  createHttpLink,
+} from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
+import { getUserCredentialsFromKeychain } from '@keychain';
+
+const httpLink = createHttpLink({
+  uri: API.BASE_URL,
+});
+
+const authLink = setContext(async (_, { headers }) => {
+  const token = (await getUserCredentialsFromKeychain())?.token;
+  return {
+    headers: {
+      ...headers,
+      ...(token ? { authorization: `JWT ${token}` } : {}),
+    },
+  };
+});
 
 const client = new ApolloClient({
-  uri: API.BASE_URL,
   cache: new InMemoryCache(),
+  link: authLink.concat(httpLink),
   defaultOptions: {
     mutate: {
+      errorPolicy: 'all',
+    },
+    query: {
       errorPolicy: 'all',
     },
   },
