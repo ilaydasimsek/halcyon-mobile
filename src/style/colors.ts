@@ -7,7 +7,7 @@ export const colors = {
   white: '#FFFFFF',
   warningRed: '#FF0000',
   textGray: '#2E2C31',
-  textGrayH2: '#94A2AB',
+  textGrayH2: '#8B878F',
   brightGray: '#E0E7EC',
   outlineGray: '#D9D9D9',
   darkGray: '#5E616B',

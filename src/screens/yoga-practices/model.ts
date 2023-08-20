@@ -35,6 +35,7 @@ export type YogaPose = {
 };
 
 export type YogaPractice = {
+  id: string;
   title: string;
   description: string;
   benefitsDescription: string;
@@ -45,6 +46,7 @@ export type YogaPractice = {
 };
 
 export type YogaChallenge = {
+  id: string;
   title: string;
   description: string;
   benefitsDescription: string;

@@ -1,7 +1,7 @@
-// const welcomeImage = require('../../assets/images/welcome-image.png');
+const backupImage1 = require('../../assets/images/backup-image-1.png');
 
 const welcomeAnimation = require('../../assets/animations/welcome-animation.json');
 export default {
-  // welcomeImage,
+  backupImage1,
   welcomeAnimation,
 };
