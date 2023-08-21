@@ -13,6 +13,7 @@ export const YOGA_PRACTICES_QUERY = gql`
           description
           benefitsDescription
           coverImageUrl
+          duration
           yogaPoses {
             name
             chakras
@@ -57,6 +58,7 @@ export type TYogaPracticeResponse = Pick<
   | 'createdBy'
   | 'benefitsDescription'
   | 'coverImageUrl'
+  | 'duration'
 > & { yogaPoses: YogaPoseResponse };
 
 export type TYogaChallengeResponse = Pick<

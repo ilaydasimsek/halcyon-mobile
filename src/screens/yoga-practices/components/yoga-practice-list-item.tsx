@@ -1,9 +1,10 @@
 import React from 'react';
-import { TYogaPracticeResponse } from './yoga-practice-query';
+import { TYogaPracticeResponse } from '../yoga-practice-query';
 import { View, Text, StyleSheet } from 'react-native';
 import { typography, colors } from '@style';
 import FastImage from 'react-native-fast-image';
 import { images } from '@constants';
+import { toTime } from '../../../common/utils/time';
 
 type TYogaPracticeListItem = {
   yogaPractice: TYogaPracticeResponse;
@@ -27,7 +28,9 @@ const YogaPracticeListItem: React.FC<TYogaPracticeListItem> = ({
         <Text style={typography.h6}>{yogaPractice.title}</Text>
         <View style={styles.listItemDetails}>
           <Text style={[typography.p4, styles.listItemTitle]}>Hatha Yoga</Text>
-          <Text style={[typography.p4, styles.listItemTitle]}>15 mins</Text>
+          <Text style={[typography.p4, styles.listItemTitle]}>
+            {toTime(yogaPractice.duration)}
+          </Text>
         </View>
       </View>
     </View>

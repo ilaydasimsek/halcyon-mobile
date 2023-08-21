@@ -14,8 +14,8 @@ type THeaderIcon = {
 const HeaderIcon: React.FC<THeaderIcon> = ({
   source,
   size = {
-    height: 24,
-    width: 24,
+    height: 16,
+    width: 16,
   },
 }) => {
   return (

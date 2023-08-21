@@ -4,12 +4,14 @@ import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import { typography, scale } from '@style';
 import { useYogaPractices, useYogaChallenges } from './yoga-practice-query';
 import { TextButton } from '@components/buttons';
-import YogaPracticeListItem from './yoga-practice-list-item';
-import YogaChallengeListItem from './yoga-challenge-list-item';
+import YogaPracticeListItem from './components/yoga-practice-list-item';
+import YogaChallengeListItem from './components/yoga-challenge-list-item';
+import { useNavigation } from '@react-navigation/native';
 
 const YogaPracticesScreen = () => {
   const { data: yogaPracticeData } = useYogaPractices({ fetchFirst: 4 });
   const { data: yogaChallengeData } = useYogaChallenges({ fetchFirst: 4 });
+  const navigation = useNavigation();
 
   if (!yogaPracticeData || !yogaChallengeData) {
     return <Text>Loading...</Text>;
@@ -18,7 +20,16 @@ const YogaPracticesScreen = () => {
     <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.header}>
         <Text style={typography.h5}>Classes</Text>
-        <TextButton text={<Text style={typography.p4}>View all</Text>} />
+        <TextButton
+          text={
+            <Text
+              style={typography.p4}
+              onPress={() => navigation.navigate('AllYogaPracticesScreen')}
+            >
+              View all
+            </Text>
+          }
+        />
       </View>
       {yogaPracticeData.yogaPractices.edges.map(({ node }) => (
         <YogaPracticeListItem key={node.id} yogaPractice={node} />

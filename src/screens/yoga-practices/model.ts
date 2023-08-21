@@ -40,6 +40,7 @@ export type YogaPractice = {
   description: string;
   benefitsDescription: string;
   coverImageUrl: string;
+  duration: number;
   createdBy: string;
   createdAt: Date;
   yogaPoses: YogaPose[];

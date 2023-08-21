@@ -15,6 +15,7 @@ import HeaderIcon from './components/header-icon';
 import LoginScreen from '../screens/auth/login/login-screen';
 import WelcomeScreen from '../screens/auth/welcome/welcome-screen';
 import RegisterScreen from '../screens/auth/register/register-screen';
+import AllYogaPracticesScreen from '../screens/all-yoga-practices/all-yoga-practices-screen';
 
 const Stack = createStackNavigator<TRootStackParamList>();
 
@@ -36,9 +37,11 @@ const AppNavigator: React.FC = () => {
         headerTitleAlign: 'center',
         headerShadowVisible: false,
         detachPreviousScreen: false,
-        title: '',
         headerLeftContainerStyle: styles.headerLeftContainer,
         headerRightContainerStyle: styles.headerRightContainer,
+        headerStyle: {
+          backgroundColor: colors.backgroundGray,
+        },
       }}
     >
       {loggedIn ? (
@@ -57,6 +60,11 @@ const AppNavigator: React.FC = () => {
               cardOverlayEnabled: true,
               presentation: 'transparentModal',
             }}
+          />
+          <Stack.Screen
+            name={'AllYogaPracticesScreen'}
+            options={{ title: 'Practices' }}
+            component={AllYogaPracticesScreen}
           />
         </>
       ) : (
