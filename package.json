@@ -22,7 +22,7 @@
     "@babel/plugin-transform-shorthand-properties": "^7.22.5",
     "@babel/plugin-transform-template-literals": "^7.22.5",
     "@babel/preset-env": "^7.22.10",
-    "@react-native-async-storage/async-storage": "^1.19.1",
+    "@react-native-async-storage/async-storage": "^1.19.2",
     "@react-native-community/masked-view": "^0.1.11",
     "@react-native-picker/picker": "^2.4.10",
     "@react-navigation/bottom-tabs": "^6.5.8",
