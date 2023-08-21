@@ -1,4 +1,4 @@
-import { TYogaChallengeResponse } from '../yoga-practice-query';
+import { TYogaChallengeResponse } from '../../yoga-practice-query';
 import { View, Text, StyleSheet } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import { images } from '@constants';

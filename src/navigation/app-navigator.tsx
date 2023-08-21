@@ -15,7 +15,7 @@ import HeaderIcon from './components/header-icon';
 import LoginScreen from '../screens/auth/login/login-screen';
 import WelcomeScreen from '../screens/auth/welcome/welcome-screen';
 import RegisterScreen from '../screens/auth/register/register-screen';
-import AllYogaPracticesScreen from '../screens/all-yoga-practices/all-yoga-practices-screen';
+import AllYogaPracticesScreen from '../screens/yoga-practice/all-yoga-practices/all-yoga-practices-screen';
 
 const Stack = createStackNavigator<TRootStackParamList>();
 

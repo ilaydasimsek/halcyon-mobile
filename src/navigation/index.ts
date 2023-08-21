@@ -6,6 +6,7 @@ import { TPickerModalScreen } from '@components/modals';
 import BottomTabNavigator from './bottom-tab-navigator';
 import { useRightNavigationHeader } from './hooks';
 import HeaderIcon from './components/header-icon';
+import { TYogaPracticeDetailsScreen } from '../screens/yoga-practice/yoga-practice-details/yoga-practice-details-screen';
 
 type TScreenList = {
   WelcomeScreen: undefined;
@@ -17,6 +18,7 @@ type TScreenList = {
   YogaLessonsScreen: undefined;
   MeditationPracticesScreen: undefined;
   AllYogaPracticesScreen: undefined;
+  YogaPracticeDetailsScreen: TYogaPracticeDetailsScreen;
   // UserDetailScreen: {
   //   user: 'self' | 'other';
   //   userId: string;

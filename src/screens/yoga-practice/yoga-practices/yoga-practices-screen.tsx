@@ -2,16 +2,17 @@ import React from 'react';
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 
 import { typography, scale } from '@style';
-import { useYogaPractices, useYogaChallenges } from './yoga-practice-query';
+import { useYogaPractices, useYogaChallenges } from '../yoga-practice-query';
 import { TextButton } from '@components/buttons';
 import YogaPracticeListItem from './components/yoga-practice-list-item';
 import YogaChallengeListItem from './components/yoga-challenge-list-item';
 import { useNavigation } from '@react-navigation/native';
+import { TStackNavigation } from '@navigation';
 
 const YogaPracticesScreen = () => {
   const { data: yogaPracticeData } = useYogaPractices({ fetchFirst: 4 });
   const { data: yogaChallengeData } = useYogaChallenges({ fetchFirst: 4 });
-  const navigation = useNavigation();
+  const navigation = useNavigation<TStackNavigation>();
 
   if (!yogaPracticeData || !yogaChallengeData) {
     return <Text>Loading...</Text>;

@@ -11,7 +11,7 @@ import {
   createMaterialTopTabNavigator,
   MaterialTopTabBarProps,
 } from '@react-navigation/material-top-tabs';
-import YogaPracticesScreen from '../../yoga-practices/yoga-practices-screen';
+import YogaPracticesScreen from '../../yoga-practice/yoga-practices/yoga-practices-screen';
 import MeditationPracticesScreen from '../../meditation-practices/meditation-practices-screen';
 import YogaLessonsScreen from '../../yoga-lessons/yoga-lessons-screen';
 import { TRootStackParamList, TNavigationItem } from '@navigation';

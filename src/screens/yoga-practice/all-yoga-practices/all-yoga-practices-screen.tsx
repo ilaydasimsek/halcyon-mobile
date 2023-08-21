@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, ScrollView, Text } from 'react-native';
-import { useYogaPractices } from '../yoga-practices/yoga-practice-query';
+import { useYogaPractices } from '../yoga-practice-query';
 import AllPracticesListItem from './components/all-practices-list-item';
 import { colors, typography } from '@style';
 import { AnimatedButton } from '@components/buttons';

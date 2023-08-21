@@ -3,7 +3,7 @@ import { View, Text, StyleSheet } from 'react-native';
 import { typography, colors, scale } from '@style';
 import FastImage from 'react-native-fast-image';
 import { images } from '@constants';
-import { TYogaPracticeResponse } from '../../yoga-practices/yoga-practice-query';
+import { TYogaPracticeResponse } from '../../yoga-practice-query';
 
 type TAllPracticesListItem = {
   yogaPractice: TYogaPracticeResponse;
