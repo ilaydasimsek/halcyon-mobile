@@ -32,7 +32,7 @@ export const typography = StyleSheet.create({
   },
   h2: {
     fontSize: rem(24),
-    fontFamily: FONT_FAMILY.poppinsBold,
+    fontFamily: FONT_FAMILY.poppinsMedium,
     ...fontColor.textGray,
   },
   h3: {

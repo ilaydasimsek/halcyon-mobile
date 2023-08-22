@@ -16,6 +16,7 @@ import LoginScreen from '../screens/auth/login/login-screen';
 import WelcomeScreen from '../screens/auth/welcome/welcome-screen';
 import RegisterScreen from '../screens/auth/register/register-screen';
 import AllYogaPracticesScreen from '../screens/yoga-practice/all-yoga-practices/all-yoga-practices-screen';
+import YogaPracticeDetailsScreen from '../screens/yoga-practice/yoga-practice-details/yoga-practice-details-screen';
 
 const Stack = createStackNavigator<TRootStackParamList>();
 
@@ -62,9 +63,14 @@ const AppNavigator: React.FC = () => {
             }}
           />
           <Stack.Screen
-            name={'AllYogaPracticesScreen'}
+            name="AllYogaPracticesScreen"
             options={{ title: 'Practices' }}
             component={AllYogaPracticesScreen}
+          />
+          <Stack.Screen
+            name="YogaPracticeDetailsScreen"
+            options={{ title: 'Details' }}
+            component={YogaPracticeDetailsScreen}
           />
         </>
       ) : (

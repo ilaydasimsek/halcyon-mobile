@@ -19,6 +19,9 @@ type TScreenList = {
   MeditationPracticesScreen: undefined;
   AllYogaPracticesScreen: undefined;
   YogaPracticeDetailsScreen: TYogaPracticeDetailsScreen;
+  BenefitsScreen: undefined;
+  OverviewScreen: undefined;
+  ProgramScreen: undefined;
   // UserDetailScreen: {
   //   user: 'self' | 'other';
   //   userId: string;
