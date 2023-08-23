@@ -27,6 +27,29 @@ export const YOGA_PRACTICES_QUERY = gql`
   }
 `;
 
+export const YOGA_PRACTICE_QUERY = gql`
+  query yogaPractice($id: Int!) {
+    yogaPractice(id: $id) {
+      id
+      title
+      createdBy
+      description
+      benefitsDescription
+      coverImageUrl
+      duration
+      muscleGroupsDistribution {
+        name
+        count
+      }
+      yogaPoses {
+        name
+        sanskritName
+        imageUrl
+      }
+    }
+  }
+`;
+
 export const YOGA_CHALLENGES_QUERY = gql`
   query yogaChallenges($first: Int) {
     yogaChallenges(first: $first) {
@@ -48,7 +71,7 @@ export const YOGA_CHALLENGES_QUERY = gql`
   }
 `;
 
-type YogaPoseResponse = Pick<YogaPose, 'name' | 'chakras' | 'muscleGroups'>;
+type YogaPoseResponse = Pick<YogaPose, 'name' | 'sanskritName' | 'imageUrl'>;
 
 export type TYogaPracticeResponse = Pick<
   YogaPractice,
@@ -59,7 +82,8 @@ export type TYogaPracticeResponse = Pick<
   | 'benefitsDescription'
   | 'coverImageUrl'
   | 'duration'
-> & { yogaPoses: YogaPoseResponse };
+  | 'muscleGroupsDistribution'
+> & { yogaPoses: YogaPoseResponse[] };
 
 export type TYogaChallengeResponse = Pick<
   YogaChallenge,
@@ -78,6 +102,16 @@ export const useYogaPractices = ({
   });
 };
 
+export const useYogaPractice = ({ id }: { id: number }) => {
+  return useQuery<{
+    yogaPractice: TYogaPracticeResponse;
+  }>(YOGA_PRACTICE_QUERY, {
+    variables: {
+      id: id,
+    },
+  });
+};
+
 export const useYogaChallenges = ({
   fetchFirst,
 }: { fetchFirst?: number } = {}) => {
@@ -87,5 +121,6 @@ export const useYogaChallenges = ({
     variables: {
       first: fetchFirst,
     },
+    errorPolicy: 'all',
   });
 };

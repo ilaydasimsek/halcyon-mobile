@@ -2,17 +2,19 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 import { colors, typography, scale } from '@style';
+import { RouteProp, useRoute } from '@react-navigation/native';
+import { TRootStackParamList } from '@navigation';
+
+type TOverviewScreenProps = RouteProp<TRootStackParamList, 'OverviewScreen'>;
+
 const OverviewScreen = () => {
+  const { params } = useRoute<TOverviewScreenProps>();
+  const yogaPractice = params.yogaPractice;
   return (
     <View style={styles.safeArea}>
-      <Text style={[typography.h2, styles.header]}>Healthy Back</Text>
+      <Text style={[typography.h2, styles.header]}>{yogaPractice.title}</Text>
       <Text style={[typography.p4, styles.body]}>
-        Cras orci orci, egestas eu aliquam ac, faucibus sed nulla nulla sit amet
-        orci vitae lectus bibendum tincidunt. Cras orci orci, egestas eu aliquam
-        ac, faucibus sed nulla nulla sit amet orci vitae lectus bibendum
-        tincidunt.Cras orci orci, egestas eu aliquam ac, faucibus sed nulla
-        nulla sit amet orci vitae lectus bibendum tincidunt.Cras orci orci,
-        egestas eu aliquam
+        {yogaPractice.description}
       </Text>
       <Text style={[typography.h2, styles.header]}>Difficulty</Text>
       <View style={styles.difficultyBackground}>

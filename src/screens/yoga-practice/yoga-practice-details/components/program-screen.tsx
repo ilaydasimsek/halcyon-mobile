@@ -1,21 +1,65 @@
 import React from 'react';
-import { StyleSheet, Text } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { colors } from '@style';
+import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import { colors, typography, scale } from '@style';
+import { RouteProp, useRoute } from '@react-navigation/native';
+import { TRootStackParamList } from '@navigation';
+import FastImage from 'react-native-fast-image';
+
+type TProgramScreenProps = RouteProp<TRootStackParamList, 'ProgramScreen'>;
 
 const ProgramScreen = () => {
+  const { params } = useRoute<TProgramScreenProps>();
+  const yogaPoses = params.yogaPractice.yogaPoses;
   return (
-    <SafeAreaView style={styles.safeArea}>
-      <Text>ProgramScreen</Text>
-    </SafeAreaView>
+    <ScrollView
+      style={styles.container}
+      contentContainerStyle={styles.scrollViewContentContainer}
+      showsVerticalScrollIndicator={false}
+    >
+      <Text style={[typography.h2, styles.header]}>Poses</Text>
+      {yogaPoses.map((pose) => (
+        <View style={styles.muscleGroupItem}>
+          <View>
+            <Text style={typography.h6}>{pose.name}</Text>
+            <Text style={typography.p4}>{pose.sanskritName}</Text>
+          </View>
+          {pose.imageUrl && (
+            <FastImage
+              style={styles.imageView}
+              source={{ uri: pose.imageUrl }}
+              resizeMode={FastImage.resizeMode.cover}
+            />
+          )}
+        </View>
+      ))}
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
-  safeArea: {
+  container: {
     flex: 1,
-    justifyContent: 'center',
     backgroundColor: colors.backgroundGray,
+  },
+  scrollViewContentContainer: {
+    paddingVertical: scale(18),
+    paddingHorizontal: scale(16),
+  },
+  muscleGroupItem: {
+    borderRadius: 10,
+    backgroundColor: colors.white,
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: scale(14),
+    justifyContent: 'space-between',
+    marginBottom: scale(10),
+  },
+  imageView: {
+    height: scale(42),
+    width: scale(42),
+  },
+  header: {
+    paddingBottom: scale(12),
   },
 });
 

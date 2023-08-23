@@ -7,6 +7,7 @@ import BottomTabNavigator from './bottom-tab-navigator';
 import { useRightNavigationHeader } from './hooks';
 import HeaderIcon from './components/header-icon';
 import { TYogaPracticeDetailsScreen } from '../screens/yoga-practice/yoga-practice-details/yoga-practice-details-screen';
+import { TYogaPracticeResponse } from '../screens/yoga-practice/yoga-practice-query';
 
 type TScreenList = {
   WelcomeScreen: undefined;
@@ -19,9 +20,15 @@ type TScreenList = {
   MeditationPracticesScreen: undefined;
   AllYogaPracticesScreen: undefined;
   YogaPracticeDetailsScreen: TYogaPracticeDetailsScreen;
-  BenefitsScreen: undefined;
-  OverviewScreen: undefined;
-  ProgramScreen: undefined;
+  BenefitsScreen: {
+    yogaPractice: TYogaPracticeResponse;
+  };
+  OverviewScreen: {
+    yogaPractice: TYogaPracticeResponse;
+  };
+  ProgramScreen: {
+    yogaPractice: TYogaPracticeResponse;
+  };
   // UserDetailScreen: {
   //   user: 'self' | 'other';
   //   userId: string;

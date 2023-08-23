@@ -6,6 +6,7 @@ import { colors } from '@style';
 import OverviewScreen from './overview-screen';
 import BenefitsScreen from './benefits-screen';
 import ProgramScreen from './program-screen';
+import { TYogaPracticeResponse } from '../../yoga-practice-query';
 
 const Tab = createMaterialTopTabNavigator<TRootStackParamList>();
 
@@ -27,7 +28,13 @@ const tabs: TNavigationItem[] = [
   },
 ];
 
-const PracticeDetailsTabNavigator: React.FC = () => {
+type TPracticeDetailsTabNavigator = {
+  yogaPractice: TYogaPracticeResponse;
+};
+
+const PracticeDetailsTabNavigator = ({
+  yogaPractice,
+}: TPracticeDetailsTabNavigator) => {
   return (
     <Tab.Navigator
       screenOptions={{
@@ -47,6 +54,7 @@ const PracticeDetailsTabNavigator: React.FC = () => {
           options={{
             title: tab.tabName,
           }}
+          initialParams={{ yogaPractice: yogaPractice }}
         />
       ))}
     </Tab.Navigator>

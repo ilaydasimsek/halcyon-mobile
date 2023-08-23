@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     paddingVertical: 10,
   },
-  buttonText: { ...typography.h3, color: colors.white },
+  buttonText: { ...typography.h4, color: colors.white },
 });
 
 export default MainButton;

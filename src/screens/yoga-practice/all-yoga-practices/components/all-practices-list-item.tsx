@@ -4,6 +4,8 @@ import { typography, colors, scale } from '@style';
 import FastImage from 'react-native-fast-image';
 import { images } from '@constants';
 import { TYogaPracticeResponse } from '../../yoga-practice-query';
+import { AnimatedButton } from '@components/buttons';
+import { useNavigation } from '@react-navigation/native';
 
 type TAllPracticesListItem = {
   yogaPractice: TYogaPracticeResponse;
@@ -12,26 +14,35 @@ type TAllPracticesListItem = {
 const AllPracticesListItem: React.FC<TAllPracticesListItem> = ({
   yogaPractice,
 }) => {
+  const navigation = useNavigation();
   return (
-    <View style={styles.listItemContainer}>
-      <View style={styles.listItemBody}>
-        <Text style={[typography.h6, styles.title]} numberOfLines={1}>
-          {yogaPractice.title}
-        </Text>
-        <Text style={typography.p4} numberOfLines={5}>
-          {yogaPractice.description}
-        </Text>
+    <AnimatedButton
+      onPress={() =>
+        navigation.navigate('YogaPracticeDetailsScreen', {
+          yogaPracticeId: yogaPractice.id,
+        })
+      }
+    >
+      <View style={styles.listItemContainer}>
+        <View style={styles.listItemBody}>
+          <Text style={[typography.h6, styles.title]} numberOfLines={1}>
+            {yogaPractice.title}
+          </Text>
+          <Text style={typography.p4} numberOfLines={5}>
+            {yogaPractice.description}
+          </Text>
+        </View>
+        <FastImage
+          style={styles.imageView}
+          source={
+            yogaPractice.coverImageUrl
+              ? { uri: yogaPractice.coverImageUrl }
+              : images.backupImage1
+          }
+          resizeMode={FastImage.resizeMode.cover}
+        />
       </View>
-      <FastImage
-        style={styles.imageView}
-        source={
-          yogaPractice.coverImageUrl
-            ? { uri: yogaPractice.coverImageUrl }
-            : images.backupImage1
-        }
-        resizeMode={FastImage.resizeMode.cover}
-      />
-    </View>
+    </AnimatedButton>
   );
 };
 

@@ -23,7 +23,7 @@ export type YogaCategory = {
 
 export type YogaPose = {
   name: string;
-  sanskrit_name: string;
+  sanskritName: string;
   description: string;
   difficulty: number;
   muscleGroups: MuscleGroup[];
@@ -44,6 +44,7 @@ export type YogaPractice = {
   createdBy: string;
   createdAt: Date;
   yogaPoses: YogaPose[];
+  muscleGroupsDistribution: MuscleGroupsDistributionItem[];
 };
 
 export type YogaChallenge = {
@@ -55,4 +56,10 @@ export type YogaChallenge = {
   createdBy: string;
   createdAt: Date;
   practices: YogaPractice[];
+};
+
+export type MuscleGroupsDistributionItem = {
+  name: string;
+  count: number;
+  id: string;
 };

@@ -1,31 +1,47 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
-// import { useRoute, RouteProp } from '@react-navigation/native';
-// import { TRootStackParamList } from '@navigation';
+import { StyleSheet, View, ActivityIndicator } from 'react-native';
+import { useRoute, RouteProp } from '@react-navigation/native';
+import { TRootStackParamList } from '@navigation';
 import { colors, scale } from '@style';
 import { images } from '@constants';
 import FastImage from 'react-native-fast-image';
 import PracticeDetailsTabNavigator from './components/practice-details-tab-navigator';
+import { useYogaPractice } from '../yoga-practice-query';
+import { MainButton } from '@components/buttons';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export type TYogaPracticeDetailsScreen = {
   yogaPracticeId: string;
 };
 
-// type TYogaPracticeDetailsScreenProps = RouteProp<
-//   TRootStackParamList,
-//   'YogaPracticeDetailsScreen'
-// >;
+type TYogaPracticeDetailsScreenProps = RouteProp<
+  TRootStackParamList,
+  'YogaPracticeDetailsScreen'
+>;
 
 const YogaPracticeDetailsScreen = () => {
-  // const route = useRoute<TYogaPracticeDetailsScreenProps>();
+  const route = useRoute<TYogaPracticeDetailsScreenProps>();
+  const { bottom } = useSafeAreaInsets();
+  const { data } = useYogaPractice({
+    id: parseInt(route.params.yogaPracticeId, 10),
+  });
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { paddingBottom: bottom }]}>
       <FastImage
         style={styles.imageView}
-        source={images.backupImage1}
+        source={
+          data?.yogaPractice.coverImageUrl
+            ? { uri: data.yogaPractice.coverImageUrl }
+            : images.backupImage1
+        }
         resizeMode={FastImage.resizeMode.cover}
       />
-      <PracticeDetailsTabNavigator />
+      {!data ? (
+        <ActivityIndicator />
+      ) : (
+        <PracticeDetailsTabNavigator yogaPractice={data.yogaPractice} />
+      )}
+      <MainButton title={'Start Practice'} style={styles.startButton} />
     </View>
   );
 };
@@ -40,6 +56,10 @@ const styles = StyleSheet.create({
     marginHorizontal: scale(35),
     marginVertical: scale(16),
     borderRadius: 10,
+  },
+  startButton: {
+    marginHorizontal: scale(22),
+    marginTop: scale(8),
   },
 });
 
