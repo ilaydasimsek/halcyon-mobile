@@ -16,7 +16,7 @@ const ProgramScreen = () => {
       contentContainerStyle={styles.scrollViewContentContainer}
       showsVerticalScrollIndicator={false}
     >
-      <Text style={[typography.h2, styles.header]}>Poses</Text>
+      <Text style={[typography.h2, styles.header]}>Program</Text>
       {yogaPoses.map((pose) => (
         <View style={styles.muscleGroupItem}>
           <View>
@@ -50,13 +50,14 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
     flexDirection: 'row',
     alignItems: 'center',
-    padding: scale(14),
+    paddingVertical: scale(6),
+    paddingHorizontal: scale(16),
     justifyContent: 'space-between',
     marginBottom: scale(10),
   },
   imageView: {
-    height: scale(42),
-    width: scale(42),
+    height: scale(52),
+    width: scale(52),
   },
   header: {
     paddingBottom: scale(12),
