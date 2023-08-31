@@ -1,10 +1,7 @@
 import React, { useMemo } from 'react';
 import { ActivityIndicator, StyleSheet } from 'react-native';
 import { useSelector } from 'react-redux';
-import {
-  createStackNavigator,
-  TransitionPresets,
-} from '@react-navigation/stack';
+import { TransitionPresets } from '@react-navigation/stack';
 
 import { colors } from '@style';
 import { icons } from '@constants';
@@ -17,8 +14,11 @@ import WelcomeScreen from '../screens/auth/welcome/welcome-screen';
 import RegisterScreen from '../screens/auth/register/register-screen';
 import AllYogaPracticesScreen from '../screens/yoga-practice/all-yoga-practices/all-yoga-practices-screen';
 import YogaPracticeDetailsScreen from '../screens/yoga-practice/yoga-practice-details/yoga-practice-details-screen';
+import YogaPracticeScreen from '../screens/yoga-practice/yoga-practice/yoga-practice-screen';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { HeaderBackButton } from '@react-navigation/elements';
 
-const Stack = createStackNavigator<TRootStackParamList>();
+const Stack = createNativeStackNavigator<TRootStackParamList>();
 
 const AppNavigator: React.FC = () => {
   const loggedIn = useSelector((state: RootState) => state.auth.loggedIn);
@@ -30,20 +30,24 @@ const AppNavigator: React.FC = () => {
   return (
     <Stack.Navigator
       initialRouteName="BottomTabNavigator"
-      screenOptions={{
-        ...TransitionPresets.SlideFromRightIOS,
+      screenOptions={({ navigation }) => ({
+        animation: 'slide_from_right',
         headerBackTitleVisible: false,
-        headerBackImage: () => headerIcon,
-        headerTintColor: colors.black,
+        headerTintColor: colors.textGray,
         headerTitleAlign: 'center',
         headerShadowVisible: false,
-        detachPreviousScreen: false,
-        headerLeftContainerStyle: styles.headerLeftContainer,
-        headerRightContainerStyle: styles.headerRightContainer,
+        headerLeft: (props) =>
+          props.canGoBack && (
+            <HeaderBackButton
+              {...props}
+              backImage={() => headerIcon}
+              onPress={() => navigation.pop()}
+            />
+          ),
         headerStyle: {
           backgroundColor: colors.backgroundGray,
         },
-      }}
+      })}
     >
       {loggedIn ? (
         <>
@@ -55,12 +59,7 @@ const AppNavigator: React.FC = () => {
           <Stack.Screen
             name="PickerModalScreen"
             component={PickerModalScreen}
-            options={{
-              ...TransitionPresets.ModalFadeTransition,
-              headerShown: false,
-              cardOverlayEnabled: true,
-              presentation: 'transparentModal',
-            }}
+            {...TransitionPresets.ModalFadeTransition}
           />
           <Stack.Screen
             name="AllYogaPracticesScreen"
@@ -72,6 +71,16 @@ const AppNavigator: React.FC = () => {
             options={{ title: 'Details' }}
             component={YogaPracticeDetailsScreen}
           />
+          <Stack.Screen
+            name="YogaPracticeScreen"
+            options={{
+              title: 'Yoga Practice',
+              headerStyle: {
+                backgroundColor: colors.white,
+              },
+            }}
+            component={YogaPracticeScreen}
+          />
         </>
       ) : (
         <>
@@ -81,7 +90,6 @@ const AppNavigator: React.FC = () => {
             options={{
               headerShown: false,
               animationTypeForReplace: loggedIn ? 'push' : 'pop',
-              animationEnabled: true,
             }}
           />
           <Stack.Screen name="LoginScreen" component={LoginScreen} />
@@ -97,8 +105,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
   },
-  headerRightContainer: { paddingRight: 25 },
-  headerLeftContainer: { paddingLeft: 25 },
 });
 
 export default AppNavigator;

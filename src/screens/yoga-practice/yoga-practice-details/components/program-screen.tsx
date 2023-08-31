@@ -17,8 +17,8 @@ const ProgramScreen = () => {
       showsVerticalScrollIndicator={false}
     >
       <Text style={[typography.h2, styles.header]}>Program</Text>
-      {yogaPoses.map((pose) => (
-        <View style={styles.muscleGroupItem}>
+      {yogaPoses.map((pose, index) => (
+        <View key={index} style={styles.muscleGroupItem}>
           <View>
             <Text style={typography.h6}>{pose.name}</Text>
             <Text style={typography.p4}>{pose.sanskritName}</Text>

@@ -9,7 +9,7 @@ import YogaChallengeListItem from './components/yoga-challenge-list-item';
 import { useNavigation } from '@react-navigation/native';
 import { TStackNavigation } from '@navigation';
 
-const YogaPracticesScreen = () => {
+const MainPracticeScreen = () => {
   const { data: yogaPracticeData } = useYogaPractices({ fetchFirst: 4 });
   const { data: yogaChallengeData } = useYogaChallenges({ fetchFirst: 4 });
   const navigation = useNavigation<TStackNavigation>();
@@ -61,4 +61,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default YogaPracticesScreen;
+export default MainPracticeScreen;

@@ -3,15 +3,13 @@ import {
   Image,
   ImageSourcePropType,
   StyleSheet,
-  Text,
-  View,
+  ImageStyle,
 } from 'react-native';
 import AnimatedButton, { TAnimatedButton } from './animated-button';
-import { colors, typography } from '@style';
 
 type TIconButtonProps = TAnimatedButton & {
   image: ImageSourcePropType;
-  title: string;
+  imageStyle: ImageStyle;
 };
 
 /**
@@ -21,33 +19,22 @@ type TIconButtonProps = TAnimatedButton & {
  *    The button stretches to fill its container by default, provide
  *    'align-self' prop to override this.
  */
-const IconButton: React.FC<TIconButtonProps> = ({ title, image, ...props }) => {
+const IconButton: React.FC<TIconButtonProps> = ({
+  image,
+  imageStyle,
+  ...props
+}) => {
   return (
-    <AnimatedButton {...props} style={[styles.button, props.style]}>
-      <View style={styles.view}>
-        <Image source={image} style={styles.image} />
-        <Text style={styles.buttonText}>{title}</Text>
-      </View>
+    <AnimatedButton {...props}>
+      <Image source={image} style={[styles.image, imageStyle]} />
     </AnimatedButton>
   );
 };
 
 const styles = StyleSheet.create({
-  view: {
-    marginHorizontal: 15,
-    alignItems: 'center',
-    flexDirection: 'row',
-  },
-  button: {
-    borderRadius: 30,
-    backgroundColor: colors.darkPink,
-  },
   image: {
     resizeMode: 'contain',
-    width: 55,
-    height: 55,
   },
-  buttonText: { ...typography.h3, color: colors.white, marginRight: 10 },
 });
 
 export default IconButton;

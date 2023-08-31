@@ -29,10 +29,9 @@ type TScreenList = {
   ProgramScreen: {
     yogaPractice: TYogaPracticeResponse;
   };
-  // UserDetailScreen: {
-  //   user: 'self' | 'other';
-  //   userId: string;
-  // };
+  YogaPracticeScreen: {
+    yogaPractice: TYogaPracticeResponse;
+  };
 };
 
 type TRootStackParamList = {
