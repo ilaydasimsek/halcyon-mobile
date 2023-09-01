@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import { scale, colors, typography, fontColor } from '@style';
-import TrackPlayer, { State } from 'react-native-track-player';
+import { State } from 'react-native-track-player';
 import { IconButton } from '@components/buttons';
 import { icons } from '@constants';
 import { toTime } from '../../../../common/utils/time';
@@ -11,11 +11,23 @@ type TTrackPlayerControls = {
   trackPlayerState: State;
   duration: number;
   currentProgress: number;
+  hasNextTrack: boolean;
+  hasPreviousTrack: boolean;
+  onSkipToPrevious: () => void;
+  onSkipToNext: () => void;
+  onPlay: () => void;
+  onPause: () => void;
 };
 const TrackPlayerControls = ({
   trackPlayerState,
   duration,
   currentProgress,
+  onSkipToPrevious,
+  onSkipToNext,
+  onPlay,
+  onPause,
+  hasNextTrack,
+  hasPreviousTrack,
 }: TTrackPlayerControls) => {
   return (
     <View style={styles.trackPlayerContainer}>
@@ -23,8 +35,11 @@ const TrackPlayerControls = ({
         <IconButton
           image={icons.trackPlayerPrev}
           imageStyle={styles.trackPlayerButtonIcon}
-          style={styles.trackPlayerButton}
-          onPress={() => TrackPlayer.skipToPrevious()}
+          style={[
+            styles.trackPlayerButton,
+            !hasPreviousTrack && styles.hiddenIconButton,
+          ]}
+          onPress={() => onSkipToPrevious()}
         />
         <IconButton
           image={
@@ -38,10 +53,10 @@ const TrackPlayerControls = ({
             switch (trackPlayerState) {
               case State.Paused:
               case State.Ready:
-                TrackPlayer.play();
+                onPlay();
                 break;
               case State.Playing:
-                TrackPlayer.pause();
+                onPause();
                 break;
               default:
                 break;
@@ -51,14 +66,19 @@ const TrackPlayerControls = ({
         <IconButton
           image={icons.trackPlayerNext}
           imageStyle={styles.trackPlayerButtonIcon}
-          style={styles.trackPlayerButton}
-          onPress={() => TrackPlayer.skipToNext()}
+          style={[
+            styles.trackPlayerButton,
+            !hasNextTrack && styles.hiddenIconButton,
+          ]}
+          onPress={() => onSkipToNext()}
         />
       </View>
       <View style={styles.sliderContainer}>
-        <Text style={[styles.timerText, styles.durationText]}>
-          {toTime(duration, 'colon')}
-        </Text>
+        {duration > 0 && (
+          <Text style={[styles.timerText, styles.durationText]}>
+            {toTime(duration, 'colon')}
+          </Text>
+        )}
         <Slider
           style={styles.slider}
           minimumValue={0}
@@ -68,9 +88,11 @@ const TrackPlayerControls = ({
           value={currentProgress}
           thumbImage={icons.thumb}
         />
-        <Text style={styles.timerText}>
-          {toTime(duration - currentProgress, 'colon')}
-        </Text>
+        {duration > 0 && (
+          <Text style={styles.timerText}>
+            {toTime(duration - currentProgress, 'colon')}
+          </Text>
+        )}
       </View>
     </View>
   );
@@ -109,6 +131,9 @@ const styles = StyleSheet.create({
   },
   durationText: {
     textAlign: 'right',
+  },
+  hiddenIconButton: {
+    opacity: 0,
   },
 });
 

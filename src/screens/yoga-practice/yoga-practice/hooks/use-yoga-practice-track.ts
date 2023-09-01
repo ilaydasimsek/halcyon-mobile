@@ -3,7 +3,6 @@ import { YogaPoseResponse } from '../../yoga-practice-query';
 import TrackPlayer, {
   usePlaybackState,
   Event,
-  useTrackPlayerEvents,
 } from 'react-native-track-player';
 import { useProgress } from 'react-native-track-player/lib/hooks';
 import { setupPlayer, addTracks } from '../../../../common/utils/track-player';
@@ -13,7 +12,9 @@ export const useYogaPracticeTrack = (yogaPoses: YogaPoseResponse[]) => {
   const [isPlayerReady, setIsPlayerReady] = useState(false);
   const trackPlayerState = usePlaybackState();
   const { duration, position } = useProgress(20);
-  const events = [Event.PlaybackTrackChanged];
+  const [hasNextTrack, setHasNextTrack] = useState(yogaPoses.length > 1);
+  const [hasPreviousTrack, setHasPreviousTrack] = useState(false);
+
   useEffect(() => {
     async function setup() {
       let isSetup = await setupPlayer();
@@ -31,13 +32,19 @@ export const useYogaPracticeTrack = (yogaPoses: YogaPoseResponse[]) => {
     }
   }, [yogaPoses]);
 
-  useTrackPlayerEvents(events, (event) => {
-    if (event.type === Event.PlaybackTrackChanged) {
+  useEffect(() => {
+    TrackPlayer.addEventListener(Event.PlaybackTrackChanged, (event) => {
       if (event.nextTrack) {
         setCurrentPose(yogaPoses[event.nextTrack]);
+        setHasNextTrack(event.nextTrack < yogaPoses.length - 1);
       }
-    }
-  });
+
+      setHasPreviousTrack(event.nextTrack !== 0);
+    });
+    return () => {
+      TrackPlayer.reset();
+    };
+  }, [yogaPoses]);
 
   return {
     isPlayerReady,
@@ -46,5 +53,7 @@ export const useYogaPracticeTrack = (yogaPoses: YogaPoseResponse[]) => {
     setCurrentPose,
     duration,
     position,
+    hasNextTrack,
+    hasPreviousTrack,
   };
 };

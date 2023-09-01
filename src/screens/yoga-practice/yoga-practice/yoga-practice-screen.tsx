@@ -1,5 +1,5 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useEffect } from 'react';
+import { StyleSheet, Text, View, ActivityIndicator } from 'react-native';
 
 import { colors, typography, scale } from '@style';
 import { RouteProp, useRoute } from '@react-navigation/native';
@@ -8,6 +8,7 @@ import { toTime } from '../../../common/utils/time';
 import FastImage from 'react-native-fast-image';
 import TrackPlayerControls from './components/track-player-controls';
 import { useYogaPracticeTrack } from './hooks/use-yoga-practice-track';
+import TrackPlayer from 'react-native-track-player';
 
 type TYogaPracticeScreenProps = RouteProp<
   TRootStackParamList,
@@ -17,8 +18,25 @@ type TYogaPracticeScreenProps = RouteProp<
 const YogaPracticeScreen = () => {
   const route = useRoute<TYogaPracticeScreenProps>();
   const yogaPractice = route.params.yogaPractice;
-  const { currentPose, trackPlayerState, duration, position } =
-    useYogaPracticeTrack(yogaPractice.yogaPoses);
+  const {
+    isPlayerReady,
+    hasNextTrack,
+    hasPreviousTrack,
+    currentPose,
+    trackPlayerState,
+    duration,
+    position,
+  } = useYogaPracticeTrack(yogaPractice.yogaPoses);
+
+  useEffect(() => {
+    if (isPlayerReady) {
+      TrackPlayer.play();
+    }
+  }, [isPlayerReady]);
+
+  if (!isPlayerReady) {
+    return <ActivityIndicator />;
+  }
   return (
     <View style={styles.container}>
       <Text style={[typography.h2, styles.header]}>{yogaPractice.title}</Text>
@@ -36,11 +54,19 @@ const YogaPracticeScreen = () => {
             trackPlayerState={trackPlayerState}
             duration={duration}
             currentProgress={position}
+            onSkipToPrevious={() => TrackPlayer.skipToPrevious()}
+            onSkipToNext={() => TrackPlayer.skipToNext()}
+            onPause={() => TrackPlayer.pause()}
+            onPlay={() => TrackPlayer.play()}
+            hasNextTrack={hasNextTrack}
+            hasPreviousTrack={hasPreviousTrack}
           />
         </View>
       </View>
-      <Text style={typography.h5}>{currentPose.name}</Text>
-      <Text style={typography.p4}>{currentPose.sanskritName}</Text>
+      <View style={styles.poseHeader}>
+        <Text style={typography.h5}>{currentPose.name}</Text>
+        <Text style={typography.p4}>{currentPose.sanskritName}</Text>
+      </View>
       <Text style={typography.p4}>{currentPose.description}</Text>
     </View>
   );
@@ -58,6 +84,9 @@ const styles = StyleSheet.create({
   },
   subHeader: {
     textAlign: 'center',
+  },
+  poseHeader: {
+    paddingVertical: scale(14),
   },
   yogaPose: {
     backgroundColor: colors.lightPink,
