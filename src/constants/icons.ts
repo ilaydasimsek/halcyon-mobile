@@ -10,6 +10,7 @@ export const trackPlayerPrev = require('../../assets/icons/track-player/prev.png
 export const trackPlayerNext = require('../../assets/icons/track-player/next.png');
 export const trackPlayerPause = require('../../assets/icons/track-player/pause.png');
 export const trackPlayerPlay = require('../../assets/icons/track-player/play.png');
+export const thumb = require('../../assets/icons/track-player/thumb-icon.png');
 
 export default {
   // Common icons
@@ -27,4 +28,5 @@ export default {
   trackPlayerNext,
   trackPlayerPause,
   trackPlayerPlay,
+  thumb,
 };
