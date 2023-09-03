@@ -121,7 +121,7 @@ const RegisterScreen: React.FC = () => {
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: colors.white },
+  container: { flex: 1, backgroundColor: colors.backgroundGray },
   body: {
     flex: 1,
     justifyContent: 'space-between',
