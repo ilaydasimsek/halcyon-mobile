@@ -92,8 +92,20 @@ const AppNavigator: React.FC = () => {
               animationTypeForReplace: loggedIn ? 'push' : 'pop',
             }}
           />
-          <Stack.Screen name="LoginScreen" component={LoginScreen} />
-          <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
+          <Stack.Screen
+            name="LoginScreen"
+            component={LoginScreen}
+            options={{
+              title: 'Login',
+            }}
+          />
+          <Stack.Screen
+            name="RegisterScreen"
+            component={RegisterScreen}
+            options={{
+              title: 'Register',
+            }}
+          />
         </>
       )}
     </Stack.Navigator>

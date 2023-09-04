@@ -124,7 +124,7 @@ const LoginScreen: React.FC = () => {
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: colors.backgroundGray },
+  container: { flex: 1 },
   body: {
     flex: 1,
     paddingHorizontal: scale(35),
