@@ -8,15 +8,34 @@ import YogaPracticeListItem from './components/yoga-practice-list-item';
 import YogaChallengeListItem from './components/yoga-challenge-list-item';
 import { useNavigation } from '@react-navigation/native';
 import { TStackNavigation } from '@navigation';
+import { BasicActivityIndicator } from '@components/helper-views';
 
 const MainPracticeScreen = () => {
-  const { data: yogaPracticeData } = useYogaPractices({ fetchFirst: 4 });
-  const { data: yogaChallengeData } = useYogaChallenges({ fetchFirst: 4 });
+  const {
+    data: yogaPracticeData,
+    loading: practicesLoading,
+    error: practiceError,
+  } = useYogaPractices({ fetchFirst: 4 });
+  const {
+    data: yogaChallengeData,
+    loading: challengesLoading,
+    error: challengeError,
+  } = useYogaChallenges({ fetchFirst: 4 });
   const navigation = useNavigation<TStackNavigation>();
 
-  if (!yogaPracticeData || !yogaChallengeData) {
-    return <Text>Loading...</Text>;
+  if (practicesLoading || challengesLoading) {
+    return <BasicActivityIndicator />;
   }
+
+  if (
+    practiceError ||
+    challengeError ||
+    !yogaPracticeData ||
+    !yogaChallengeData
+  ) {
+    return <Text>Oops something went wrong...</Text>;
+  }
+
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.header}>

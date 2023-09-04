@@ -5,6 +5,7 @@ import AllPracticesListItem from './components/all-practices-list-item';
 import { colors, typography } from '@style';
 import { AnimatedButton } from '@components/buttons';
 import { YogaCategory } from '../model';
+import { BasicActivityIndicator } from '@components/helper-views';
 
 type TCategoryItem = {
   title: string;
@@ -31,14 +32,23 @@ const AllYogaPracticesScreen = () => {
     null,
   );
 
-  const { data: yogaPracticeData } = useYogaPractices({
+  const {
+    data: yogaPracticeData,
+    loading,
+    error,
+  } = useYogaPractices({
     styleId: selectedCategory?.id,
   });
-  const { data: yogaStyleData } = useYogaStyles();
+  const { data: yogaStyleData, loading: yogaStylesLoading } = useYogaStyles();
 
-  if (!yogaPracticeData) {
-    return <Text>Loading...</Text>;
+  if (loading || yogaStylesLoading) {
+    return <BasicActivityIndicator />;
   }
+
+  if (error || !yogaPracticeData) {
+    return <Text>Oops something went wrong...</Text>;
+  }
+
   return (
     <View style={styles.container}>
       <ScrollView
