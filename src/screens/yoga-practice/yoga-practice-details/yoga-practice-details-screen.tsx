@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, ActivityIndicator } from 'react-native';
-import { useRoute, RouteProp } from '@react-navigation/native';
+import { useRoute, RouteProp, useNavigation } from '@react-navigation/native';
 import { TRootStackParamList } from '@navigation';
 import { colors, scale } from '@style';
 import { images } from '@constants';
@@ -21,10 +21,16 @@ type TYogaPracticeDetailsScreenProps = RouteProp<
 
 const YogaPracticeDetailsScreen = () => {
   const route = useRoute<TYogaPracticeDetailsScreenProps>();
+  const navigation = useNavigation();
   const { bottom } = useSafeAreaInsets();
   const { data } = useYogaPractice({
     id: parseInt(route.params.yogaPracticeId, 10),
   });
+
+  if (!data) {
+    return <ActivityIndicator />;
+  }
+
   return (
     <View style={[styles.container, { paddingBottom: bottom }]}>
       <FastImage
@@ -41,7 +47,15 @@ const YogaPracticeDetailsScreen = () => {
       ) : (
         <PracticeDetailsTabNavigator yogaPractice={data.yogaPractice} />
       )}
-      <MainButton title={'Start Practice'} style={styles.startButton} />
+      <MainButton
+        title={'Start Practice'}
+        style={styles.startButton}
+        onPress={() => {
+          navigation.navigate('YogaPracticeScreen', {
+            yogaPractice: data.yogaPractice,
+          });
+        }}
+      />
     </View>
   );
 };

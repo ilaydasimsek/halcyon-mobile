@@ -38,13 +38,17 @@ export const YOGA_PRACTICE_QUERY = gql`
       coverImageUrl
       duration
       muscleGroupsDistribution {
+        id
         name
         count
       }
       yogaPoses {
+        id
         name
         sanskritName
         imageUrl
+        description
+        audioUrl
       }
     }
   }
@@ -71,7 +75,10 @@ export const YOGA_CHALLENGES_QUERY = gql`
   }
 `;
 
-type YogaPoseResponse = Pick<YogaPose, 'name' | 'sanskritName' | 'imageUrl'>;
+export type YogaPoseResponse = Pick<
+  YogaPose,
+  'id' | 'name' | 'sanskritName' | 'imageUrl' | 'description' | 'audioUrl'
+>;
 
 export type TYogaPracticeResponse = Pick<
   YogaPractice,

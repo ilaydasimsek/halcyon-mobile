@@ -28,7 +28,7 @@ const BenefitsScreen = () => {
 
       {yogaPractice.muscleGroupsDistribution.map((item) => {
         return (
-          <View style={styles.muscleGroupItem}>
+          <View key={item.id} style={styles.muscleGroupItem}>
             <Text style={typography.h6}>{item.name}</Text>
             <CircularProgress
               progressValueColor={colors.darkPink}

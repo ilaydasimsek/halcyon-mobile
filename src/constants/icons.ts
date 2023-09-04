@@ -6,6 +6,11 @@ export const profileSelected = require('../../assets/icons/bottom-nav-bar/profil
 export const lessonsHeader = require('../../assets/icons/common/lessons-header-icon.png');
 export const meditationHeader = require('../../assets/icons/common/meditation-header-icon.png');
 export const yogaHeader = require('../../assets/icons/common/yoga-header-icon.png');
+export const trackPlayerPrev = require('../../assets/icons/track-player/prev.png');
+export const trackPlayerNext = require('../../assets/icons/track-player/next.png');
+export const trackPlayerPause = require('../../assets/icons/track-player/pause.png');
+export const trackPlayerPlay = require('../../assets/icons/track-player/play.png');
+export const thumb = require('../../assets/icons/track-player/thumb-icon.png');
 
 export default {
   // Common icons
@@ -18,4 +23,10 @@ export default {
   profile,
   homeSelected,
   profileSelected,
+  // Track Player
+  trackPlayerPrev,
+  trackPlayerNext,
+  trackPlayerPause,
+  trackPlayerPlay,
+  thumb,
 };

@@ -14,6 +14,8 @@ import {
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import { getUserCredentialsFromKeychain } from '@keychain';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { StyleSheet } from 'react-native';
 
 const httpLink = createHttpLink({
   uri: API.BASE_URL,
@@ -47,13 +49,21 @@ const App = () => {
     <NavigationContainer>
       <ApolloProvider client={client}>
         <Provider store={store}>
-          <AppContainer>
-            <AppNavigator />
-          </AppContainer>
+          <GestureHandlerRootView style={styles.container}>
+            <AppContainer>
+              <AppNavigator />
+            </AppContainer>
+          </GestureHandlerRootView>
         </Provider>
       </ApolloProvider>
     </NavigationContainer>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});
 
 export default App;

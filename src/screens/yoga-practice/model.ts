@@ -22,6 +22,7 @@ export type YogaCategory = {
 };
 
 export type YogaPose = {
+  id: string;
   name: string;
   sanskritName: string;
   description: string;

@@ -11,7 +11,7 @@ import {
   createMaterialTopTabNavigator,
   MaterialTopTabBarProps,
 } from '@react-navigation/material-top-tabs';
-import YogaPracticesScreen from '../../yoga-practice/yoga-practices/yoga-practices-screen';
+import MainPracticeScreen from '../../yoga-practice/main-practice-screen/main-practice-screen';
 import MeditationPracticesScreen from '../../meditation-practices/meditation-practices-screen';
 import YogaLessonsScreen from '../../yoga-lessons/yoga-lessons-screen';
 import { TRootStackParamList, TNavigationItem } from '@navigation';
@@ -29,7 +29,7 @@ const homeScreenTabs: TTopNavigationItem[] = [
     tabName: 'Yoga',
     screenName: 'YogaPracticesScreen',
     icon: icons.yogaHeader,
-    component: YogaPracticesScreen,
+    component: MainPracticeScreen,
   },
   {
     tabName: 'Meditation',

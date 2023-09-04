@@ -2,8 +2,6 @@ import React, { PropsWithChildren } from 'react';
 import { StyleSheet } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
-import { colors } from '@style';
-
 const CustomKeyboardAvoidingView: React.FC<PropsWithChildren> = ({
   children,
 }) => {
@@ -25,7 +23,7 @@ const CustomKeyboardAvoidingView: React.FC<PropsWithChildren> = ({
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: colors.white },
+  container: { flex: 1 },
   scrollViewContainer: { flexGrow: 1 },
 });
 
