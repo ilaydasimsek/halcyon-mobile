@@ -12,11 +12,13 @@ export type MuscleGroup = {
 };
 
 export type YogaStyle = {
+  id: string;
   name: string;
   description: string;
 };
 
 export type YogaCategory = {
+  id: string;
   name: string;
   description: string;
 };

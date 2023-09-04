@@ -1,10 +1,10 @@
 import { gql, useQuery } from '@apollo/client';
 import { RelayNode } from '../../common/types/graphql';
-import { YogaPose, YogaPractice, YogaChallenge } from './model';
+import { YogaPose, YogaPractice, YogaChallenge, YogaStyle } from './model';
 
 export const YOGA_PRACTICES_QUERY = gql`
-  query yogaPractices($first: Int) {
-    yogaPractices(first: $first) {
+  query yogaPractices($first: Int, $styleId: Int) {
+    yogaPractices(first: $first, styleId: $styleId) {
       edges {
         node {
           id
@@ -75,6 +75,20 @@ export const YOGA_CHALLENGES_QUERY = gql`
   }
 `;
 
+export const YOGA_STYLES_QUERY = gql`
+  query yogaStyles {
+    yogaStyles {
+      edges {
+        node {
+          id
+          name
+          description
+        }
+      }
+    }
+  }
+`;
+
 export type YogaPoseResponse = Pick<
   YogaPose,
   'id' | 'name' | 'sanskritName' | 'imageUrl' | 'description' | 'audioUrl'
@@ -97,16 +111,26 @@ export type TYogaChallengeResponse = Pick<
   'id' | 'title' | 'description' | 'coverImageUrl'
 > & { practices: TYogaPracticeResponse };
 
+export type TYogaStyleResponse = YogaStyle;
+
 export const useYogaPractices = ({
+  styleId,
   fetchFirst,
-}: { fetchFirst?: number } = {}) => {
+}: { styleId?: string; fetchFirst?: number } = {}) => {
   return useQuery<{
     yogaPractices: RelayNode<TYogaPracticeResponse>;
   }>(YOGA_PRACTICES_QUERY, {
     variables: {
       first: fetchFirst,
+      styleId: styleId ? parseInt(styleId, 10) : undefined,
     },
   });
+};
+
+export const useYogaStyles = () => {
+  return useQuery<{
+    yogaStyles: RelayNode<TYogaStyleResponse>;
+  }>(YOGA_STYLES_QUERY);
 };
 
 export const useYogaPractice = ({ id }: { id: number }) => {

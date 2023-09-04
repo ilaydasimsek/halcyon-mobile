@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, ScrollView, Text } from 'react-native';
-import { useYogaPractices } from '../yoga-practice-query';
+import { useYogaPractices, useYogaStyles } from '../yoga-practice-query';
 import AllPracticesListItem from './components/all-practices-list-item';
 import { colors, typography } from '@style';
 import { AnimatedButton } from '@components/buttons';
+import { YogaCategory } from '../model';
 
 type TCategoryItem = {
   title: string;
@@ -26,17 +27,14 @@ const CategoryItem = ({ title, selected, onSelect }: TCategoryItem) => {
 };
 
 const AllYogaPracticesScreen = () => {
-  const { data: yogaPracticeData } = useYogaPractices();
-  const categories = [
-    'Hatha',
-    'Vinyasa',
-    'Yin',
-    'Cat 1',
-    'Cat 2',
-    'Cat 3',
-    'Cat 4',
-  ];
-  const [selectedCategory, setSelectedCategory] = useState(categories[0]);
+  const [selectedCategory, setSelectedCategory] = useState<YogaCategory | null>(
+    null,
+  );
+
+  const { data: yogaPracticeData } = useYogaPractices({
+    styleId: selectedCategory?.id,
+  });
+  const { data: yogaStyleData } = useYogaStyles();
 
   if (!yogaPracticeData) {
     return <Text>Loading...</Text>;
@@ -48,16 +46,22 @@ const AllYogaPracticesScreen = () => {
         horizontal
         showsHorizontalScrollIndicator={false}
       >
-        {categories.map((category) => (
+        <CategoryItem
+          key={'All'}
+          title={'All'}
+          selected={selectedCategory === null}
+          onSelect={() => setSelectedCategory(null)}
+        />
+        {yogaStyleData?.yogaStyles.edges.map((category) => (
           <CategoryItem
-            key={category}
-            title={category}
-            selected={category === selectedCategory}
-            onSelect={() => setSelectedCategory(category)}
+            key={category.node.name}
+            title={category.node.name}
+            selected={category.node === selectedCategory}
+            onSelect={() => setSelectedCategory(category.node)}
           />
         ))}
       </ScrollView>
-      <ScrollView>
+      <ScrollView contentContainerStyle={styles.body}>
         {yogaPracticeData.yogaPractices.edges.map(({ node }) => (
           <AllPracticesListItem key={node.id} yogaPractice={node} />
         ))}
@@ -70,8 +74,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  body: {
+    flexGrow: 1,
+  },
   categories: {
     margin: 8,
+    flexGrow: 0,
   },
   categoryItem: {
     borderRadius: 5,
