@@ -5,7 +5,7 @@ export const colors = {
   black50: '#00000080',
   black25: '#00000040',
   white: '#FFFFFF',
-  warningRed: '#FF0000',
+  warningRed: '#D60000',
   textGray: '#2E2C31',
   textGrayH2: '#8B878F',
   brightGray: '#E0E7EC',

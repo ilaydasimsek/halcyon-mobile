@@ -13,6 +13,7 @@ const translation = {
   emailPlaceholder: 'Your email address',
   alreadyMember: 'Already a member?',
   login: 'Login',
+  somethingWentWrong: 'Something went wrong.',
 };
 
 export default translation;

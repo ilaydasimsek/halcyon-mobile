@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { SafeAreaView, StyleSheet, Text, TextInput, View } from 'react-native';
 import { useFormik } from 'formik';
 import { useNavigation } from '@react-navigation/native';
@@ -18,7 +18,7 @@ const LoginScreen: React.FC = () => {
 
   const emailInputRef = useRef<TextInput>(null);
   const passwordInputRef = useRef<TextInput>(null);
-  const [loginMutation] = useLogin();
+  const [loginMutation, { error, reset }] = useLogin();
   const initialValues: TLoginQuery = {
     email: '',
     password: '',
@@ -30,6 +30,8 @@ const LoginScreen: React.FC = () => {
     handleBlur,
     values,
     errors: formErrors,
+    isSubmitting,
+    setSubmitting,
   } = useFormik({
     validationSchema: LoginSchema,
     initialValues: initialValues,
@@ -40,6 +42,11 @@ const LoginScreen: React.FC = () => {
     },
   });
 
+  useEffect(() => {
+    if (error) {
+      setSubmitting(false);
+    }
+  }, [error, setSubmitting]);
   const onSubmit = () => {
     passwordInputRef.current?.blur();
     emailInputRef.current?.blur();
@@ -52,12 +59,12 @@ const LoginScreen: React.FC = () => {
   };
 
   const onChangeTextInputField = () => {
-    // resetRequest();
+    reset();
   };
 
   return (
     <SafeAreaView style={styles.container}>
-      <SpinnerOverlay visible={false} />
+      <SpinnerOverlay visible={isSubmitting} />
       <CustomKeyboardAvoidingView>
         <View style={styles.body}>
           <View>
@@ -96,6 +103,9 @@ const LoginScreen: React.FC = () => {
               }
               style={styles.resetPasswordButton}
             />
+            <Text style={[typography.p4, fontColor.warningRed]}>
+              {error?.message ?? ''}
+            </Text>
           </View>
           <View>
             <MainButton

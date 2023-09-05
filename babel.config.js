@@ -7,6 +7,7 @@ module.exports = {
       {
         alias: {
           '@components/buttons': './src/common/components/buttons',
+          '@components/error': './src/common/components/error',
           '@components/flat-list': './src/common/components/flat-list',
           '@components/search': './src/common/components/search',
           '@components/helper-views': './src/common/components/helper-views',

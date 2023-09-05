@@ -6,6 +6,7 @@ import { colors, typography } from '@style';
 import { AnimatedButton } from '@components/buttons';
 import { YogaCategory } from '../model';
 import { BasicActivityIndicator } from '@components/helper-views';
+import { BasicErrorView } from '@components/error';
 
 type TCategoryItem = {
   title: string;
@@ -36,17 +37,14 @@ const AllYogaPracticesScreen = () => {
     data: yogaPracticeData,
     loading,
     error,
+    refetch,
   } = useYogaPractices({
     styleId: selectedCategory?.id,
   });
-  const { data: yogaStyleData, loading: yogaStylesLoading } = useYogaStyles();
+  const { data: yogaStyleData } = useYogaStyles();
 
-  if (loading || yogaStylesLoading) {
-    return <BasicActivityIndicator />;
-  }
-
-  if (error || !yogaPracticeData) {
-    return <Text>Oops something went wrong...</Text>;
+  if (error || (!yogaPracticeData && !loading)) {
+    return <BasicErrorView onRefresh={() => refetch()} />;
   }
 
   return (
@@ -71,11 +69,15 @@ const AllYogaPracticesScreen = () => {
           />
         ))}
       </ScrollView>
-      <ScrollView contentContainerStyle={styles.body}>
-        {yogaPracticeData.yogaPractices.edges.map(({ node }) => (
-          <AllPracticesListItem key={node.id} yogaPractice={node} />
-        ))}
-      </ScrollView>
+      {loading ? (
+        <BasicActivityIndicator />
+      ) : (
+        <ScrollView contentContainerStyle={styles.body}>
+          {yogaPracticeData?.yogaPractices.edges.map(({ node }) => (
+            <AllPracticesListItem key={node.id} yogaPractice={node} />
+          ))}
+        </ScrollView>
+      )}
     </View>
   );
 };

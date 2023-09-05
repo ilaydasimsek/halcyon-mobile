@@ -9,17 +9,20 @@ import YogaChallengeListItem from './components/yoga-challenge-list-item';
 import { useNavigation } from '@react-navigation/native';
 import { TStackNavigation } from '@navigation';
 import { BasicActivityIndicator } from '@components/helper-views';
+import { BasicErrorView } from '@components/error';
 
 const MainPracticeScreen = () => {
   const {
     data: yogaPracticeData,
     loading: practicesLoading,
     error: practiceError,
+    refetch: refetchPractices,
   } = useYogaPractices({ fetchFirst: 4 });
   const {
     data: yogaChallengeData,
     loading: challengesLoading,
     error: challengeError,
+    refetch: refetchChallenges,
   } = useYogaChallenges({ fetchFirst: 4 });
   const navigation = useNavigation<TStackNavigation>();
 
@@ -33,7 +36,14 @@ const MainPracticeScreen = () => {
     !yogaPracticeData ||
     !yogaChallengeData
   ) {
-    return <Text>Oops something went wrong...</Text>;
+    return (
+      <BasicErrorView
+        onRefresh={() => {
+          refetchPractices();
+          refetchChallenges();
+        }}
+      />
+    );
   }
 
   return (
