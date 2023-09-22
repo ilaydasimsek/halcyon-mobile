@@ -32,6 +32,7 @@ type TScreenList = {
   YogaPracticeScreen: {
     yogaPractice: TYogaPracticeResponse;
   };
+  YogaChallengesScreen: undefined;
 };
 
 type TRootStackParamList = {

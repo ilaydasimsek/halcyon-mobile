@@ -66,7 +66,16 @@ const MainPracticeScreen = () => {
       ))}
       <View style={styles.header}>
         <Text style={typography.h5}>Challenges</Text>
-        <TextButton text={<Text style={typography.p4}>View all</Text>} />
+        <TextButton
+          text={
+            <Text
+              style={typography.p4}
+              onPress={() => navigation.navigate('YogaChallengesScreen')}
+            >
+              View all
+            </Text>
+          }
+        />
       </View>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
         {yogaChallengeData.yogaChallenges.edges.map(({ node }) => (

@@ -17,6 +17,7 @@ import YogaPracticeDetailsScreen from '../screens/yoga-practice/yoga-practice-de
 import YogaPracticeScreen from '../screens/yoga-practice/yoga-practice/yoga-practice-screen';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { HeaderBackButton } from '@react-navigation/elements';
+import YogaChallengesScreen from '../screens/yoga-practice/yoga-challenges/yoga-challenges-screen';
 
 const Stack = createNativeStackNavigator<TRootStackParamList>();
 
@@ -80,6 +81,13 @@ const AppNavigator: React.FC = () => {
               },
             }}
             component={YogaPracticeScreen}
+          />
+          <Stack.Screen
+            name="YogaChallengesScreen"
+            options={{
+              title: 'Yoga Challenges',
+            }}
+            component={YogaChallengesScreen}
           />
         </>
       ) : (

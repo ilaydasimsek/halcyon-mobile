@@ -109,7 +109,7 @@ export type TYogaPracticeResponse = Pick<
 export type TYogaChallengeResponse = Pick<
   YogaChallenge,
   'id' | 'title' | 'description' | 'coverImageUrl'
-> & { practices: TYogaPracticeResponse };
+> & { practices: TYogaPracticeResponse[] };
 
 export type TYogaStyleResponse = YogaStyle;
 

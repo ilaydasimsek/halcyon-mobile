@@ -55,6 +55,11 @@ export const typography = StyleSheet.create({
     fontFamily: FONT_FAMILY.poppinsMedium,
     ...fontColor.textGray,
   },
+  h7: {
+    fontSize: rem(8),
+    fontFamily: FONT_FAMILY.poppinsMedium,
+    ...fontColor.textGray,
+  },
   p1: {
     fontSize: rem(18),
     fontFamily: FONT_FAMILY.poppinsRegular,
