@@ -9,6 +9,7 @@ import PracticeDetailsTabNavigator from './components/practice-details-tab-navig
 import { useYogaPractice } from '../yoga-practice-query';
 import { MainButton } from '@components/buttons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { BasicErrorView } from '@components/error';
 
 export type TYogaPracticeDetailsScreen = {
   yogaPracticeId: string;
@@ -23,36 +24,37 @@ const YogaPracticeDetailsScreen = () => {
   const route = useRoute<TYogaPracticeDetailsScreenProps>();
   const navigation = useNavigation();
   const { bottom } = useSafeAreaInsets();
-  const { data } = useYogaPractice({
+  const { data, loading, error, refetch } = useYogaPractice({
     id: parseInt(route.params.yogaPracticeId, 10),
   });
 
-  if (!data) {
+  if (loading) {
     return <ActivityIndicator />;
   }
 
+  if (error) {
+    return <BasicErrorView onRefresh={() => refetch()} />;
+  }
+
+  const yogaPractice = data!.yogaPractice;
   return (
     <View style={[styles.container, { paddingBottom: bottom }]}>
       <FastImage
         style={styles.imageView}
         source={
-          data?.yogaPractice.coverImageUrl
-            ? { uri: data.yogaPractice.coverImageUrl }
+          yogaPractice.coverImageUrl
+            ? { uri: yogaPractice.coverImageUrl }
             : images.backupImage1
         }
         resizeMode={FastImage.resizeMode.cover}
       />
-      {!data ? (
-        <ActivityIndicator />
-      ) : (
-        <PracticeDetailsTabNavigator yogaPractice={data.yogaPractice} />
-      )}
+      <PracticeDetailsTabNavigator yogaPractice={yogaPractice} />
       <MainButton
         title={'Start Practice'}
         style={styles.startButton}
         onPress={() => {
           navigation.navigate('YogaPracticeScreen', {
-            yogaPractice: data.yogaPractice,
+            yogaPractice: yogaPractice,
           });
         }}
       />

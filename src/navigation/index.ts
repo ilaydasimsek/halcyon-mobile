@@ -8,6 +8,7 @@ import { useRightNavigationHeader } from './hooks';
 import HeaderIcon from './components/header-icon';
 import { TYogaPracticeDetailsScreen } from '../screens/yoga-practice/yoga-practice-details/yoga-practice-details-screen';
 import { TYogaPracticeResponse } from '../screens/yoga-practice/yoga-practice-query';
+import { TYogaChallengeDetailsScreen } from '../screens/yoga-practice/yoga-challenge-details/yoga-challenge-details-screen';
 
 type TScreenList = {
   WelcomeScreen: undefined;
@@ -20,6 +21,7 @@ type TScreenList = {
   MeditationPracticesScreen: undefined;
   AllYogaPracticesScreen: undefined;
   YogaPracticeDetailsScreen: TYogaPracticeDetailsScreen;
+  YogaChallengeDetailsScreen: TYogaChallengeDetailsScreen;
   BenefitsScreen: {
     yogaPractice: TYogaPracticeResponse;
   };

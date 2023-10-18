@@ -5,6 +5,7 @@ import FastImage from 'react-native-fast-image';
 import { images } from '@constants';
 import { TYogaChallengeResponse } from '../../yoga-practice-query';
 import { AnimatedButton } from '@components/buttons';
+import { useNavigation } from '@react-navigation/native';
 
 type TAllPracticesListItem = {
   yogaChallenge: TYogaChallengeResponse;
@@ -13,8 +14,15 @@ type TAllPracticesListItem = {
 const AllChallengesListItem: React.FC<TAllPracticesListItem> = ({
   yogaChallenge,
 }) => {
+  const navigation = useNavigation();
   return (
-    <AnimatedButton onPress={() => {}}>
+    <AnimatedButton
+      onPress={() =>
+        navigation.navigate('YogaChallengeDetailsScreen', {
+          yogaChallengeId: yogaChallenge.id,
+        })
+      }
+    >
       <View style={styles.listItemContainer}>
         <View style={styles.listItemBody}>
           <Text style={[typography.h6, styles.title]} numberOfLines={2}>
