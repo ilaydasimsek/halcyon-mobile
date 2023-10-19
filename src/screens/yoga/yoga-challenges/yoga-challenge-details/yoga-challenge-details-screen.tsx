@@ -6,9 +6,9 @@ import { colors, scale, typography } from '@style';
 import { images } from '@constants';
 import FastImage from 'react-native-fast-image';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useYogaChallenge } from '../yoga-practice-query';
 import YogaPracticeListItem from './components/yoga-practice-list-item';
 import { BasicErrorView } from '@components/error';
+import { useYogaChallenge } from '../yoga-challenge-query';
 
 export type TYogaChallengeDetailsScreen = {
   yogaChallengeId: string;

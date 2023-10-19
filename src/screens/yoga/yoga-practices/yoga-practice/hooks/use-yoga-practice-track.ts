@@ -5,7 +5,10 @@ import TrackPlayer, {
   Event,
 } from 'react-native-track-player';
 import { useProgress } from 'react-native-track-player/lib/hooks';
-import { setupPlayer, addTracks } from '../../../../common/utils/track-player';
+import {
+  setupPlayer,
+  addTracks,
+} from '../../../../../common/utils/track-player';
 
 export const useYogaPracticeTrack = (yogaPoses: YogaPoseResponse[]) => {
   const [currentPose, setCurrentPose] = useState(yogaPoses[0]);
@@ -14,6 +17,7 @@ export const useYogaPracticeTrack = (yogaPoses: YogaPoseResponse[]) => {
   const { duration, position } = useProgress(20);
   const [hasNextTrack, setHasNextTrack] = useState(yogaPoses.length > 1);
   const [hasPreviousTrack, setHasPreviousTrack] = useState(false);
+  const [queueEnded, setQueueEnded] = useState(false);
 
   useEffect(() => {
     async function setup() {
@@ -41,6 +45,10 @@ export const useYogaPracticeTrack = (yogaPoses: YogaPoseResponse[]) => {
 
       setHasPreviousTrack(event.nextTrack !== 0);
     });
+
+    TrackPlayer.addEventListener(Event.PlaybackQueueEnded, () => {
+      setQueueEnded(true);
+    });
     return () => {
       TrackPlayer.reset();
     };
@@ -55,5 +63,6 @@ export const useYogaPracticeTrack = (yogaPoses: YogaPoseResponse[]) => {
     position,
     hasNextTrack,
     hasPreviousTrack,
+    queueEnded,
   };
 };

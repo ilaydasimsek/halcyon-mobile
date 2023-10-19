@@ -1,5 +1,5 @@
 import React from 'react';
-import { TYogaPracticeResponse } from '../../yoga-practice-query';
+import { TYogaPracticeResponse } from '../../yoga-practices/yoga-practice-query';
 import { View, Text, StyleSheet } from 'react-native';
 import { typography, colors } from '@style';
 import FastImage from 'react-native-fast-image';

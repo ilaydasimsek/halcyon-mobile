@@ -6,9 +6,9 @@ import { TPickerModalScreen } from '@components/modals';
 import BottomTabNavigator from './bottom-tab-navigator';
 import { useRightNavigationHeader } from './hooks';
 import HeaderIcon from './components/header-icon';
-import { TYogaPracticeDetailsScreen } from '../screens/yoga-practice/yoga-practice-details/yoga-practice-details-screen';
-import { TYogaPracticeResponse } from '../screens/yoga-practice/yoga-practice-query';
-import { TYogaChallengeDetailsScreen } from '../screens/yoga-practice/yoga-challenge-details/yoga-challenge-details-screen';
+import { TYogaPracticeDetailsScreen } from '../screens/yoga/yoga-practices/yoga-practice-details/yoga-practice-details-screen';
+import { TYogaPracticeResponse } from '../screens/yoga/yoga-practices/yoga-practice-query';
+import { TYogaChallengeDetailsScreen } from '../screens/yoga/yoga-challenges/yoga-challenge-details/yoga-challenge-details-screen';
 
 type TScreenList = {
   WelcomeScreen: undefined;

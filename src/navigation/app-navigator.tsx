@@ -12,13 +12,13 @@ import HeaderIcon from './components/header-icon';
 import LoginScreen from '../screens/auth/login/login-screen';
 import WelcomeScreen from '../screens/auth/welcome/welcome-screen';
 import RegisterScreen from '../screens/auth/register/register-screen';
-import AllYogaPracticesScreen from '../screens/yoga-practice/all-yoga-practices/all-yoga-practices-screen';
-import YogaPracticeDetailsScreen from '../screens/yoga-practice/yoga-practice-details/yoga-practice-details-screen';
-import YogaPracticeScreen from '../screens/yoga-practice/yoga-practice/yoga-practice-screen';
+import AllYogaPracticesScreen from '../screens/yoga/yoga-practices/all-yoga-practices/all-yoga-practices-screen';
+import YogaPracticeDetailsScreen from '../screens/yoga/yoga-practices/yoga-practice-details/yoga-practice-details-screen';
+import YogaPracticeScreen from '../screens/yoga/yoga-practices/yoga-practice/yoga-practice-screen';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { HeaderBackButton } from '@react-navigation/elements';
-import YogaChallengesScreen from '../screens/yoga-practice/yoga-challenges/yoga-challenges-screen';
-import YogaChallengeDetailsScreen from '../screens/yoga-practice/yoga-challenge-details/yoga-challenge-details-screen';
+import YogaChallengesScreen from '../screens/yoga/yoga-challenges/all-yoga-challenges/yoga-challenges-screen';
+import YogaChallengeDetailsScreen from '../screens/yoga/yoga-challenges/yoga-challenge-details/yoga-challenge-details-screen';
 
 const Stack = createNativeStackNavigator<TRootStackParamList>();
 

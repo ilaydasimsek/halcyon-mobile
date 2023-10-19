@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 
 import { typography, scale } from '@style';
-import { useYogaPractices, useYogaChallenges } from '../yoga-practice-query';
+import { useYogaPractices } from '../yoga-practices/yoga-practice-query';
 import { TextButton } from '@components/buttons';
 import YogaPracticeListItem from './components/yoga-practice-list-item';
 import YogaChallengeListItem from './components/yoga-challenge-list-item';
@@ -10,8 +10,9 @@ import { useNavigation } from '@react-navigation/native';
 import { TStackNavigation } from '@navigation';
 import { BasicActivityIndicator } from '@components/helper-views';
 import { BasicErrorView } from '@components/error';
+import { useYogaChallenges } from '../yoga-challenges/yoga-challenge-query';
 
-const MainPracticeScreen = () => {
+const MainYogaScreen = () => {
   const {
     data: yogaPracticeData,
     loading: practicesLoading,
@@ -99,4 +100,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MainPracticeScreen;
+export default MainYogaScreen;

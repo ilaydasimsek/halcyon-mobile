@@ -4,7 +4,7 @@ import { scale, colors, typography, fontColor } from '@style';
 import { State } from 'react-native-track-player';
 import { IconButton } from '@components/buttons';
 import { icons } from '@constants';
-import { toTime } from '../../../../common/utils/time';
+import { toTime } from '../../../../../common/utils/time';
 import Slider from '@react-native-community/slider';
 
 type TTrackPlayerControls = {

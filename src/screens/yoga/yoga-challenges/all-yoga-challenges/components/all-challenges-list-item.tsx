@@ -3,9 +3,9 @@ import { View, Text, StyleSheet } from 'react-native';
 import { typography, colors, scale } from '@style';
 import FastImage from 'react-native-fast-image';
 import { images } from '@constants';
-import { TYogaChallengeResponse } from '../../yoga-practice-query';
 import { AnimatedButton } from '@components/buttons';
 import { useNavigation } from '@react-navigation/native';
+import { TYogaChallengeResponse } from '../../yoga-challenge-query';
 
 type TAllPracticesListItem = {
   yogaChallenge: TYogaChallengeResponse;

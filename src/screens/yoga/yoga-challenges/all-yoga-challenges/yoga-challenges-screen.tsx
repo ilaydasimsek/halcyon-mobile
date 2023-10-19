@@ -1,10 +1,10 @@
 import React from 'react';
 import { StyleSheet, ScrollView, Text } from 'react-native';
-import { useYogaChallenges } from '../yoga-practice-query';
 import AllChallengesListItem from './components/all-challenges-list-item';
-import { useYogaJourney } from '../yoga-journey-query';
+import { useYogaJourney } from '../../yoga-journey-query';
 import StartedChallengeListItem from './components/started-journey-list-item';
 import { typography, scale } from '@style';
+import { useYogaChallenges } from '../yoga-challenge-query';
 const YogaChallengesScreen = () => {
   const { data } = useYogaChallenges();
   const { data: yogaJourneyData } = useYogaJourney();

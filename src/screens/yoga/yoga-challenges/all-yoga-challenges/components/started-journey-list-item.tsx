@@ -2,7 +2,7 @@ import React from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import { colors, scale, typography } from '@style';
 import { AnimatedButton } from '@components/buttons';
-import { TActiveYogaChallengeNode } from '../../yoga-journey-query';
+import { TActiveYogaChallengeNode } from '../../../yoga-journey-query';
 import FastImage from 'react-native-fast-image';
 import { icons } from '@constants';
 

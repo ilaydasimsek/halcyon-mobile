@@ -4,7 +4,7 @@ import { useYogaPractices, useYogaStyles } from '../yoga-practice-query';
 import AllPracticesListItem from './components/all-practices-list-item';
 import { colors, typography } from '@style';
 import { AnimatedButton } from '@components/buttons';
-import { YogaCategory } from '../model';
+import { YogaCategory } from '../../model';
 import { BasicActivityIndicator } from '@components/helper-views';
 import { BasicErrorView } from '@components/error';
 

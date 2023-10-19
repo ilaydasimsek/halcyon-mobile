@@ -1,7 +1,6 @@
-import { gql, useQuery } from '@apollo/client';
-import { RelayNode } from '../../common/types/graphql';
-import { YogaPose, YogaPractice, YogaChallenge, YogaStyle } from './model';
-import { TActiveYogaChallengeNode } from './yoga-journey-query';
+import { gql, useQuery, useMutation } from '@apollo/client';
+import { RelayNode } from '../../../common/types/graphql';
+import { YogaPose, YogaPractice, YogaStyle } from '../model';
 
 export const YOGA_PRACTICES_QUERY = gql`
   query yogaPractices($first: Int, $styleId: Int) {
@@ -55,61 +54,6 @@ export const YOGA_PRACTICE_QUERY = gql`
   }
 `;
 
-export const YOGA_CHALLENGES_QUERY = gql`
-  query yogaChallenges($first: Int) {
-    yogaChallenges(first: $first) {
-      edges {
-        node {
-          id
-          title
-          createdBy
-          description
-          benefitsDescription
-          coverImageUrl
-          practices {
-            id
-            title
-          }
-        }
-      }
-    }
-  }
-`;
-
-export const YOGA_CHALLENGE_QUERY = gql`
-  query yogaChallenge($id: Int!) {
-    yogaChallenge(id: $id) {
-      id
-      title
-      createdBy
-      description
-      benefitsDescription
-      coverImageUrl
-      practices {
-        id
-        title
-        duration
-      }
-      activeYogaChallenge {
-        yogaChallenge {
-          id
-          title
-          description
-          coverImageUrl
-          practices {
-            id
-            title
-          }
-        }
-        completedYogaPractices {
-          id
-          title
-        }
-      }
-    }
-  }
-`;
-
 export const YOGA_STYLES_QUERY = gql`
   query yogaStyles {
     yogaStyles {
@@ -123,6 +67,18 @@ export const YOGA_STYLES_QUERY = gql`
     }
   }
 `;
+
+export const COMPLETE_YOGA_PRACTICE_MUTATION = gql`
+  mutation completeYogaPractice($id: Int!) {
+    completeYogaPractice(yogaPracticeId: $id) {
+      ok
+    }
+  }
+`;
+
+export type TCompleteYogaPracticeMutationRequest = {
+  id: number;
+};
 
 export type YogaPoseResponse = Pick<
   YogaPose,
@@ -141,15 +97,11 @@ export type TYogaPracticeResponse = Pick<
   | 'muscleGroupsDistribution'
 > & { yogaPoses: YogaPoseResponse[] };
 
-export type TYogaChallengeResponse = Pick<
-  YogaChallenge,
-  'id' | 'title' | 'description' | 'coverImageUrl'
-> & {
-  practices: TYogaPracticeResponse[];
-  activeYogaChallenge: TActiveYogaChallengeNode;
-};
-
 export type TYogaStyleResponse = YogaStyle;
+
+type TCompletionResponse = {
+  ok: boolean;
+};
 
 export const useYogaPractices = ({
   styleId,
@@ -181,25 +133,9 @@ export const useYogaPractice = ({ id }: { id: number }) => {
   });
 };
 
-export const useYogaChallenges = ({
-  fetchFirst,
-}: { fetchFirst?: number } = {}) => {
-  return useQuery<{
-    yogaChallenges: RelayNode<TYogaChallengeResponse>;
-  }>(YOGA_CHALLENGES_QUERY, {
-    variables: {
-      first: fetchFirst,
-    },
-    errorPolicy: 'all',
-  });
-};
-
-export const useYogaChallenge = ({ id }: { id: number }) => {
-  return useQuery<{
-    yogaChallenge: TYogaChallengeResponse;
-  }>(YOGA_CHALLENGE_QUERY, {
-    variables: {
-      id: id,
-    },
-  });
+export const useCompleteYogaPracticeMutation = () => {
+  return useMutation<
+    { result: TCompletionResponse },
+    TCompleteYogaPracticeMutationRequest
+  >(COMPLETE_YOGA_PRACTICE_MUTATION);
 };

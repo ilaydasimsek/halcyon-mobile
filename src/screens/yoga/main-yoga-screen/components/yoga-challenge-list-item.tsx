@@ -1,9 +1,9 @@
-import { TYogaChallengeResponse } from '../../yoga-practice-query';
 import { View, Text, StyleSheet } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import { images } from '@constants';
 import { typography, scale, colors } from '@style';
 import React from 'react';
+import { TYogaChallengeResponse } from '../../yoga-challenges/yoga-challenge-query';
 
 type TYogaChallengeListItem = {
   yogaChallenge: TYogaChallengeResponse;

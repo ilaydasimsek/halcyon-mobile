@@ -4,11 +4,12 @@ import { StyleSheet, Text, View, ActivityIndicator } from 'react-native';
 import { colors, typography, scale } from '@style';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import { TRootStackParamList } from '@navigation';
-import { toTime } from '../../../common/utils/time';
+import { toTime } from '../../../../common/utils/time';
 import FastImage from 'react-native-fast-image';
 import TrackPlayerControls from './components/track-player-controls';
 import { useYogaPracticeTrack } from './hooks/use-yoga-practice-track';
 import TrackPlayer from 'react-native-track-player';
+import { useCompleteYogaPracticeMutation } from '../yoga-practice-query';
 
 type TYogaPracticeScreenProps = RouteProp<
   TRootStackParamList,
@@ -26,7 +27,9 @@ const YogaPracticeScreen = () => {
     trackPlayerState,
     duration,
     position,
+    queueEnded,
   } = useYogaPracticeTrack(yogaPractice.yogaPoses);
+  const [completeYogaPracticeMutation] = useCompleteYogaPracticeMutation();
 
   useEffect(() => {
     if (isPlayerReady) {
@@ -34,6 +37,10 @@ const YogaPracticeScreen = () => {
     }
   }, [isPlayerReady]);
 
+  useEffect(() => {
+    if (queueEnded) {
+    }
+  }, [completeYogaPracticeMutation, queueEnded, yogaPractice.id]);
   if (!isPlayerReady) {
     return <ActivityIndicator />;
   }

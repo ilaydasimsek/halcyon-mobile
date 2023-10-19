@@ -1,10 +1,10 @@
 import React from 'react';
-import { TYogaPracticeResponse } from '../../yoga-practice-query';
+import { TYogaPracticeResponse } from '../../../yoga-practices/yoga-practice-query';
 import { useNavigation } from '@react-navigation/native';
 import { AnimatedButton } from '@components/buttons';
 import { View, Text, StyleSheet } from 'react-native';
 import { typography, colors, scale } from '@style';
-import { toTime } from '../../../../common/utils/time';
+import { toTime } from '../../../../../common/utils/time';
 
 type TYogaPracticeListItem = {
   yogaPractice: TYogaPracticeResponse;
