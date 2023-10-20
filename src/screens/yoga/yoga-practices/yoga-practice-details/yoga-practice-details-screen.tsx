@@ -13,6 +13,7 @@ import { BasicErrorView } from '@components/error';
 
 export type TYogaPracticeDetailsScreen = {
   yogaPracticeId: string;
+  challengeId?: string;
 };
 
 type TYogaPracticeDetailsScreenProps = RouteProp<
@@ -55,6 +56,7 @@ const YogaPracticeDetailsScreen = () => {
         onPress={() => {
           navigation.navigate('YogaPracticeScreen', {
             yogaPractice: yogaPractice,
+            challengeId: route.params.challengeId,
           });
         }}
       />

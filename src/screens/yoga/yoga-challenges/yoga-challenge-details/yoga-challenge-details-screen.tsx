@@ -51,7 +51,11 @@ const YogaChallengeDetailsScreen = () => {
         {yogaChallenge.description}
       </Text>
       {yogaChallenge.practices.map((practice) => (
-        <YogaPracticeListItem key={practice.id} yogaPractice={practice} />
+        <YogaPracticeListItem
+          key={practice.id}
+          yogaPractice={practice}
+          yogaChallengeId={route.params.yogaChallengeId}
+        />
       ))}
     </View>
   );

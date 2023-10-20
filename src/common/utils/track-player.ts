@@ -48,7 +48,3 @@ export async function addTracks(urls: string[]) {
   );
   await TrackPlayer.setRepeatMode(RepeatMode.Off);
 }
-
-export async function playbackService() {
-  // TODO: Attach remote event handlers
-}

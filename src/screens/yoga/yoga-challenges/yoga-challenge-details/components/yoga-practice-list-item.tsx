@@ -8,9 +8,11 @@ import { toTime } from '../../../../../common/utils/time';
 
 type TYogaPracticeListItem = {
   yogaPractice: TYogaPracticeResponse;
+  yogaChallengeId?: string;
 };
 const YogaPracticeListItem: React.FC<TYogaPracticeListItem> = ({
   yogaPractice,
+  yogaChallengeId,
 }) => {
   const navigation = useNavigation();
   return (
@@ -18,6 +20,7 @@ const YogaPracticeListItem: React.FC<TYogaPracticeListItem> = ({
       onPress={() =>
         navigation.navigate('YogaPracticeDetailsScreen', {
           yogaPracticeId: yogaPractice.id,
+          challengeId: yogaChallengeId,
         })
       }
     >

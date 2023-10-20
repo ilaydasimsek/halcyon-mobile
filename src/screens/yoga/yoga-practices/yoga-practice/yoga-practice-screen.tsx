@@ -2,14 +2,15 @@ import React, { useEffect } from 'react';
 import { StyleSheet, Text, View, ActivityIndicator } from 'react-native';
 
 import { colors, typography, scale } from '@style';
-import { RouteProp, useRoute } from '@react-navigation/native';
-import { TRootStackParamList } from '@navigation';
+import { RouteProp, useRoute, useNavigation } from '@react-navigation/native';
+import { TRootStackParamList, TStackNavigation } from '@navigation';
 import { toTime } from '../../../../common/utils/time';
 import FastImage from 'react-native-fast-image';
 import TrackPlayerControls from './components/track-player-controls';
 import { useYogaPracticeTrack } from './hooks/use-yoga-practice-track';
 import TrackPlayer from 'react-native-track-player';
 import { useCompleteYogaPracticeMutation } from '../yoga-practice-query';
+import { useCompleteYogaChallengePracticeMutation } from '../../yoga-challenges/yoga-challenge-query';
 
 type TYogaPracticeScreenProps = RouteProp<
   TRootStackParamList,
@@ -18,6 +19,7 @@ type TYogaPracticeScreenProps = RouteProp<
 
 const YogaPracticeScreen = () => {
   const route = useRoute<TYogaPracticeScreenProps>();
+  const navigation = useNavigation<TStackNavigation>();
   const yogaPractice = route.params.yogaPractice;
   const {
     isPlayerReady,
@@ -30,6 +32,8 @@ const YogaPracticeScreen = () => {
     queueEnded,
   } = useYogaPracticeTrack(yogaPractice.yogaPoses);
   const [completeYogaPracticeMutation] = useCompleteYogaPracticeMutation();
+  const [completeYogaChallengePracticeMutation] =
+    useCompleteYogaChallengePracticeMutation();
 
   useEffect(() => {
     if (isPlayerReady) {
@@ -39,8 +43,29 @@ const YogaPracticeScreen = () => {
 
   useEffect(() => {
     if (queueEnded) {
+      if (route.params.challengeId) {
+        completeYogaChallengePracticeMutation({
+          variables: {
+            challengeId: parseInt(route.params.challengeId, 10),
+            practiceId: parseInt(yogaPractice.id, 10),
+          },
+        });
+      } else {
+        completeYogaPracticeMutation({
+          variables: { id: parseInt(yogaPractice.id, 10) },
+        });
+      }
+      navigation.replace('PracticeCompletionScreen');
     }
-  }, [completeYogaPracticeMutation, queueEnded, yogaPractice.id]);
+  }, [
+    completeYogaChallengePracticeMutation,
+    completeYogaPracticeMutation,
+    navigation,
+    queueEnded,
+    route.params.challengeId,
+    yogaPractice.id,
+  ]);
+
   if (!isPlayerReady) {
     return <ActivityIndicator />;
   }
