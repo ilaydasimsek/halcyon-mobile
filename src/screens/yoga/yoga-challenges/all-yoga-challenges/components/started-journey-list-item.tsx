@@ -44,7 +44,7 @@ const StartedChallengeListItem: React.FC<TAllPracticesListItem> = ({
             style={[
               styles.completedDays,
               {
-                width: completedYogaPracticePercentage + '%',
+                width: `${completedYogaPracticePercentage}%`,
               },
             ]}
           />
