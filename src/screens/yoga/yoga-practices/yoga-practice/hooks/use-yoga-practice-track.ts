@@ -21,7 +21,7 @@ export const useYogaPracticeTrack = (yogaPoses: YogaPoseResponse[]) => {
 
   useEffect(() => {
     async function setup() {
-      let isSetup = await setupPlayer();
+      const isSetup = await setupPlayer();
 
       const queue = await TrackPlayer.getQueue();
       if (isSetup && queue.length <= 0) {

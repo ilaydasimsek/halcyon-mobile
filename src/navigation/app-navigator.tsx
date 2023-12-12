@@ -35,7 +35,7 @@ const AppNavigator: React.FC = () => {
       initialRouteName="BottomTabNavigator"
       screenOptions={({ navigation }) => ({
         animation: 'slide_from_right',
-        headerBackTitleVisible: false,
+        // headerBackTitleVisible: false,
         headerTintColor: colors.textGray,
         headerTitleAlign: 'center',
         headerShadowVisible: false,
@@ -45,6 +45,7 @@ const AppNavigator: React.FC = () => {
               {...props}
               backImage={() => headerIcon}
               onPress={() => navigation.pop()}
+              labelVisible={false}
             />
           ),
         headerStyle: {
