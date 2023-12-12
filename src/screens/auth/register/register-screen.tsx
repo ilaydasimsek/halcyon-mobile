@@ -98,7 +98,7 @@ const RegisterScreen: React.FC = () => {
           <Text>{error?.message}</Text>
           <MainButton
             onPress={onSubmit}
-            title={localized('signIn')}
+            title={localized('signUp')}
             style={styles.signInButton}
             disabled={Object.keys(formErrors).length !== 0}
           />
