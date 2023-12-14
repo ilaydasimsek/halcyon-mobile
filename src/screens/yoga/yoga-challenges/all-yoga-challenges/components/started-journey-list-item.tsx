@@ -5,6 +5,7 @@ import { AnimatedButton } from '@components/buttons';
 import { TActiveYogaChallengeNode } from '../../../yoga-journey-query';
 import FastImage from 'react-native-fast-image';
 import { icons } from '@constants';
+import { useNavigation } from '@react-navigation/native';
 
 type TAllPracticesListItem = {
   activeYogaChallengeNode: TActiveYogaChallengeNode;
@@ -17,8 +18,15 @@ const StartedChallengeListItem: React.FC<TAllPracticesListItem> = ({
     (activeYogaChallengeNode.completedYogaPractices.length /
       activeYogaChallengeNode.yogaChallenge.practices.length) *
     100;
+  const navigation = useNavigation();
   return (
-    <AnimatedButton onPress={() => {}}>
+    <AnimatedButton
+      onPress={() => {
+        navigation.navigate('YogaChallengeDetailsScreen', {
+          yogaChallengeId: activeYogaChallengeNode.yogaChallenge.id,
+        });
+      }}
+    >
       <View style={styles.listItemContainer}>
         <View style={styles.header}>
           <View>
