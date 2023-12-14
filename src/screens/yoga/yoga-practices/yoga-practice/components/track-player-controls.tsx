@@ -15,6 +15,7 @@ type TTrackPlayerControls = {
   hasPreviousTrack: boolean;
   onSkipToPrevious: () => void;
   onSkipToNext: () => void;
+  onSkipToValue: (value: number) => void;
   onPlay: () => void;
   onPause: () => void;
 };
@@ -24,6 +25,7 @@ const TrackPlayerControls = ({
   currentProgress,
   onSkipToPrevious,
   onSkipToNext,
+  onSkipToValue,
   onPlay,
   onPause,
   hasNextTrack,
@@ -87,6 +89,8 @@ const TrackPlayerControls = ({
           maximumTrackTintColor={colors.white}
           value={currentProgress}
           thumbImage={icons.thumb}
+          tapToSeek={true}
+          onSlidingComplete={(value) => onSkipToValue(value)}
         />
         {duration > 0 && (
           <Text style={styles.timerText}>

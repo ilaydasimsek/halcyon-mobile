@@ -4,38 +4,49 @@ import { images } from '@constants';
 import { typography, scale, colors } from '@style';
 import React from 'react';
 import { TYogaChallengeResponse } from '../../yoga-challenges/yoga-challenge-query';
+import { useNavigation } from '@react-navigation/native';
+import { AnimatedButton } from '@components/buttons';
 
 type TYogaChallengeListItem = {
   yogaChallenge: TYogaChallengeResponse;
 };
 
 const YogaChallengeListItem = ({ yogaChallenge }: TYogaChallengeListItem) => {
+  const navigation = useNavigation();
   return (
-    <View style={styles.yogaChallengeItem}>
-      <View style={styles.yogaChallengeInnerItem}>
-        <View style={styles.yogaChallengeItemHeader}>
-          <FastImage
-            style={styles.imageView}
-            source={
-              yogaChallenge.coverImageUrl
-                ? { uri: yogaChallenge.coverImageUrl }
-                : images.backupImage1
-            }
-            resizeMode={FastImage.resizeMode.cover}
-          />
+    <AnimatedButton
+      onPress={() =>
+        navigation.navigate('YogaChallengeDetailsScreen', {
+          yogaChallengeId: yogaChallenge.id,
+        })
+      }
+    >
+      <View style={styles.yogaChallengeItem}>
+        <View style={styles.yogaChallengeInnerItem}>
+          <View style={styles.yogaChallengeItemHeader}>
+            <FastImage
+              style={styles.imageView}
+              source={
+                yogaChallenge.coverImageUrl
+                  ? { uri: yogaChallenge.coverImageUrl }
+                  : images.backupImage1
+              }
+              resizeMode={FastImage.resizeMode.cover}
+            />
+            <View style={styles.textContainer}>
+              <Text style={typography.h6} numberOfLines={1}>
+                {yogaChallenge.title}
+              </Text>
+            </View>
+          </View>
           <View style={styles.textContainer}>
-            <Text style={typography.h6} numberOfLines={1}>
-              {yogaChallenge.title}
+            <Text style={[typography.p4]} numberOfLines={6}>
+              {yogaChallenge.description}
             </Text>
           </View>
         </View>
-        <View style={styles.textContainer}>
-          <Text style={[typography.p4]} numberOfLines={6}>
-            {yogaChallenge.description}
-          </Text>
-        </View>
       </View>
-    </View>
+    </AnimatedButton>
   );
 };
 

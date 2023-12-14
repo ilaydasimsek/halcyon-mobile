@@ -88,6 +88,7 @@ const YogaPracticeScreen = () => {
             currentProgress={position}
             onSkipToPrevious={() => TrackPlayer.skipToPrevious()}
             onSkipToNext={() => TrackPlayer.skipToNext()}
+            onSkipToValue={(value) => TrackPlayer.seekTo(value)}
             onPause={() => TrackPlayer.pause()}
             onPlay={() => TrackPlayer.play()}
             hasNextTrack={hasNextTrack}
