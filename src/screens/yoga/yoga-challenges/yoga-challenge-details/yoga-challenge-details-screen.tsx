@@ -35,6 +35,11 @@ const YogaChallengeDetailsScreen = () => {
   }
 
   const yogaChallenge = data!.yogaChallenge;
+  const completedChallengePractices =
+    yogaChallenge.activeYogaChallenge?.completedYogaPractices?.map(
+      (practice) => practice.id,
+    ) ?? [];
+
   return (
     <View style={[styles.container, { paddingBottom: bottom }]}>
       <FastImage
@@ -54,6 +59,7 @@ const YogaChallengeDetailsScreen = () => {
         <YogaPracticeListItem
           key={practice.id}
           yogaPractice={practice}
+          completed={completedChallengePractices.includes(practice.id)}
           yogaChallengeId={route.params.yogaChallengeId}
         />
       ))}
