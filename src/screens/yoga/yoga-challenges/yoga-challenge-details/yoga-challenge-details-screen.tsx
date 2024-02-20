@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, ActivityIndicator, Text } from 'react-native';
-import { useRoute, RouteProp } from '@react-navigation/native';
+import { useRoute, RouteProp, useNavigation } from '@react-navigation/native';
 import { TRootStackParamList } from '@navigation';
 import { colors, scale, typography } from '@style';
 import { images } from '@constants';
@@ -8,7 +8,10 @@ import FastImage from 'react-native-fast-image';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import YogaPracticeListItem from './components/yoga-practice-list-item';
 import { BasicErrorView } from '@components/error';
-import { useYogaChallenge } from '../yoga-challenge-query';
+import {
+  useYogaChallenge,
+  useStartYogaChallengeMutation,
+} from '../yoga-challenge-query';
 
 export type TYogaChallengeDetailsScreen = {
   yogaChallengeId: string;
@@ -22,9 +25,11 @@ type TYogaChallengeDetailsScreenProps = RouteProp<
 const YogaChallengeDetailsScreen = () => {
   const route = useRoute<TYogaChallengeDetailsScreenProps>();
   const { bottom } = useSafeAreaInsets();
+  const navigation = useNavigation();
   const { data, loading, error, refetch } = useYogaChallenge({
     id: parseInt(route.params.yogaChallengeId, 10),
   });
+  const [startYogaChallengeMutation] = useStartYogaChallengeMutation();
 
   if (loading) {
     return <ActivityIndicator />;
@@ -60,7 +65,19 @@ const YogaChallengeDetailsScreen = () => {
           key={practice.id}
           yogaPractice={practice}
           completed={completedChallengePractices.includes(practice.id)}
-          yogaChallengeId={route.params.yogaChallengeId}
+          onPress={async () => {
+            if (!yogaChallenge.activeYogaChallenge) {
+              await startYogaChallengeMutation({
+                variables: {
+                  id: parseInt(yogaChallenge.id, 10),
+                },
+              });
+            }
+            navigation.navigate('YogaPracticeDetailsScreen', {
+              yogaPracticeId: practice.id,
+              challengeId: yogaChallenge.id,
+            });
+          }}
         />
       ))}
     </View>
