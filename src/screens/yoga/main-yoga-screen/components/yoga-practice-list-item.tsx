@@ -38,7 +38,7 @@ const YogaPracticeListItem: React.FC<TYogaPracticeListItem> = ({
           <Text style={typography.h6}>{yogaPractice.title}</Text>
           <View style={styles.listItemDetails}>
             <Text style={[typography.p4, styles.listItemTitle]}>
-              Hatha Yoga
+              {yogaPractice.style?.name}
             </Text>
             <Text style={[typography.p4, styles.listItemTitle]}>
               {toTime(yogaPractice.duration)}

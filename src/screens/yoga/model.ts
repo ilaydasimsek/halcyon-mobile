@@ -47,6 +47,7 @@ export type YogaPractice = {
   createdBy: string;
   createdAt: Date;
   yogaPoses: YogaPose[];
+  style: YogaStyle;
   muscleGroupsDistribution: MuscleGroupsDistributionItem[];
 };
 

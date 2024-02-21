@@ -21,6 +21,11 @@ export const YOGA_PRACTICES_QUERY = gql`
               name
             }
           }
+          style {
+            id
+            name
+            description
+          }
         }
       }
     }
@@ -41,6 +46,11 @@ export const YOGA_PRACTICE_QUERY = gql`
         id
         name
         count
+      }
+      style {
+        id
+        name
+        description
       }
       yogaPoses {
         id
@@ -95,6 +105,7 @@ export type TYogaPracticeResponse = Pick<
   | 'coverImageUrl'
   | 'duration'
   | 'muscleGroupsDistribution'
+  | 'style'
 > & { yogaPoses: YogaPoseResponse[] };
 
 export type TYogaStyleResponse = YogaStyle;
