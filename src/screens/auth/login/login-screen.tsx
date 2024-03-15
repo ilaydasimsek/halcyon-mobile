@@ -4,10 +4,7 @@ import { useFormik } from 'formik';
 import { useNavigation } from '@react-navigation/native';
 
 import { colors, fontColor, scale, typography } from '@style';
-import {
-  CustomKeyboardAvoidingView,
-  SpinnerOverlay,
-} from '@components/helper-views';
+import { CustomKeyboardAvoidingView } from '@components/helper-views';
 import { localized } from '@localization';
 import { MainButton, TextButton } from '@components/buttons';
 import { TLoginQuery, useLogin } from '../auth-query';
@@ -64,7 +61,6 @@ const LoginScreen: React.FC = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <SpinnerOverlay visible={isSubmitting} />
       <CustomKeyboardAvoidingView>
         <View style={styles.body}>
           <View>
@@ -109,6 +105,7 @@ const LoginScreen: React.FC = () => {
           </View>
           <View>
             <MainButton
+              loading={isSubmitting}
               onPress={onSubmit}
               title={localized('signIn')}
               style={styles.loginButton}

@@ -1,13 +1,10 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { useFormik } from 'formik';
 import { SafeAreaView, StyleSheet, Text, TextInput, View } from 'react-native';
 
 import { colors, fontColor, scale, typography } from '@style';
-import {
-  CustomKeyboardAvoidingView,
-  SpinnerOverlay,
-} from '../../../common/components/helper-views';
+import { CustomKeyboardAvoidingView } from '../../../common/components/helper-views';
 import { localized } from '@localization';
 import { MainButton, TextButton } from '@components/buttons';
 import RegisterSchema from './register-schema';
@@ -29,6 +26,8 @@ const RegisterScreen: React.FC = () => {
     handleSubmit,
     handleBlur,
     values,
+    isSubmitting,
+    setSubmitting,
     errors: formErrors,
   } = useFormik({
     validationSchema: RegisterSchema,
@@ -45,6 +44,12 @@ const RegisterScreen: React.FC = () => {
     navigation.navigate('LoginScreen');
   };
 
+  useEffect(() => {
+    if (error) {
+      setSubmitting(false);
+    }
+  }, [error, setSubmitting]);
+
   const onSubmit = () => {
     nameInputRef.current?.blur();
     emailInputRef.current?.blur();
@@ -58,7 +63,6 @@ const RegisterScreen: React.FC = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <SpinnerOverlay visible={false} />
       <CustomKeyboardAvoidingView>
         <View style={styles.body}>
           <View>
@@ -97,6 +101,7 @@ const RegisterScreen: React.FC = () => {
           </View>
           <Text>{error?.message}</Text>
           <MainButton
+            loading={isSubmitting}
             onPress={onSubmit}
             title={localized('signUp')}
             style={styles.signInButton}
