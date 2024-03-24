@@ -26,7 +26,7 @@ export const YOGA_CHALLENGES_QUERY = gql`
 `;
 
 export const YOGA_CHALLENGE_QUERY = gql`
-  query yogaChallenge($id: Int!) {
+  query yogaChallenge($id: String!) {
     yogaChallenge(id: $id) {
       id
       title
@@ -60,7 +60,7 @@ export const YOGA_CHALLENGE_QUERY = gql`
 `;
 
 export const START_YOGA_CHALLENGE_MUTATION = gql`
-  mutation startYogaChallenge($id: Int!) {
+  mutation startYogaChallenge($id: String!) {
     startYogaChallenge(yogaChallengeId: $id) {
       ok
     }
@@ -69,8 +69,8 @@ export const START_YOGA_CHALLENGE_MUTATION = gql`
 
 export const COMPLETE_YOGA_CHALLENGE_PRACTICE_MUTATION = gql`
   mutation completeYogaChallengePractice(
-    $challengeId: Int!
-    $practiceId: Int!
+    $challengeId: String!
+    $practiceId: String!
   ) {
     completeYogaChallengePractice(
       yogaChallengeId: $challengeId
@@ -82,12 +82,12 @@ export const COMPLETE_YOGA_CHALLENGE_PRACTICE_MUTATION = gql`
 `;
 
 export type TStartYogaChallengeMutationRequest = {
-  id: number;
+  id: string;
 };
 
 export type TCompleteYogaChallengePracticeMutationRequest = {
-  challengeId: number;
-  practiceId: number;
+  challengeId: string;
+  practiceId: string;
 };
 
 export type TYogaChallengeResponse = Pick<
@@ -115,7 +115,7 @@ export const useYogaChallenges = ({
   });
 };
 
-export const useYogaChallenge = ({ id }: { id: number }) => {
+export const useYogaChallenge = ({ id }: { id: string }) => {
   return useQuery<{
     yogaChallenge: TYogaChallengeResponse;
   }>(YOGA_CHALLENGE_QUERY, {

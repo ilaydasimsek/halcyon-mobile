@@ -27,7 +27,7 @@ const YogaChallengeDetailsScreen = () => {
   const { bottom } = useSafeAreaInsets();
   const navigation = useNavigation();
   const { data, loading, error, refetch } = useYogaChallenge({
-    id: parseInt(route.params.yogaChallengeId, 10),
+    id: route.params.yogaChallengeId,
   });
   const [startYogaChallengeMutation] = useStartYogaChallengeMutation();
 
@@ -69,7 +69,7 @@ const YogaChallengeDetailsScreen = () => {
             if (!yogaChallenge.activeYogaChallenge) {
               await startYogaChallengeMutation({
                 variables: {
-                  id: parseInt(yogaChallenge.id, 10),
+                  id: yogaChallenge.id,
                 },
               });
             }

@@ -3,7 +3,7 @@ import { RelayNode } from '../../../common/types/graphql';
 import { YogaPose, YogaPractice, YogaStyle } from '../model';
 
 export const YOGA_PRACTICES_QUERY = gql`
-  query yogaPractices($first: Int, $styleId: Int) {
+  query yogaPractices($first: Int, $styleId: String) {
     yogaPractices(first: $first, styleId: $styleId) {
       edges {
         node {
@@ -33,7 +33,7 @@ export const YOGA_PRACTICES_QUERY = gql`
 `;
 
 export const YOGA_PRACTICE_QUERY = gql`
-  query yogaPractice($id: Int!) {
+  query yogaPractice($id: String!) {
     yogaPractice(id: $id) {
       id
       title
@@ -79,7 +79,7 @@ export const YOGA_STYLES_QUERY = gql`
 `;
 
 export const COMPLETE_YOGA_PRACTICE_MUTATION = gql`
-  mutation completeYogaPractice($id: Int!) {
+  mutation completeYogaPractice($id: String!) {
     completeYogaPractice(yogaPracticeId: $id) {
       ok
     }
@@ -87,7 +87,7 @@ export const COMPLETE_YOGA_PRACTICE_MUTATION = gql`
 `;
 
 export type TCompleteYogaPracticeMutationRequest = {
-  id: number;
+  id: string;
 };
 
 export type YogaPoseResponse = Pick<
@@ -123,7 +123,7 @@ export const useYogaPractices = ({
   }>(YOGA_PRACTICES_QUERY, {
     variables: {
       first: fetchFirst,
-      styleId: styleId ? parseInt(styleId, 10) : undefined,
+      styleId: styleId,
     },
   });
 };
@@ -134,7 +134,7 @@ export const useYogaStyles = () => {
   }>(YOGA_STYLES_QUERY);
 };
 
-export const useYogaPractice = ({ id }: { id: number }) => {
+export const useYogaPractice = ({ id }: { id: string }) => {
   return useQuery<{
     yogaPractice: TYogaPracticeResponse;
   }>(YOGA_PRACTICE_QUERY, {
