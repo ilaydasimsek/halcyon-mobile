@@ -16,6 +16,7 @@ import { setContext } from '@apollo/client/link/context';
 import { getUserCredentialsFromKeychain } from '@keychain';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { StyleSheet } from 'react-native';
+import { relayStylePagination } from '@apollo/client/utilities';
 
 const httpLink = createHttpLink({
   uri: API.BASE_URL,
@@ -32,7 +33,11 @@ const authLink = setContext(async (_, { headers }) => {
 });
 
 const client = new ApolloClient({
-  cache: new InMemoryCache(),
+  cache: new InMemoryCache({
+    typePolicies: {
+      Query: { fields: { articles: relayStylePagination() } },
+    },
+  }),
   link: authLink.concat(httpLink),
   defaultOptions: {
     mutate: {

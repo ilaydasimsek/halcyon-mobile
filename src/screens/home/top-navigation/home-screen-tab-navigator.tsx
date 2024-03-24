@@ -13,10 +13,10 @@ import {
 } from '@react-navigation/material-top-tabs';
 import MainYogaScreen from '../../yoga/main-yoga-screen/main-yoga-screen';
 import MeditationPracticesScreen from '../../meditation-practices/meditation-practices-screen';
-import YogaLessonsScreen from '../../yoga-lessons/yoga-lessons-screen';
 import { TRootStackParamList, TNavigationItem } from '@navigation';
 import TopTabNavigationItem from './components/top-tab-navigation-item';
 import { colors } from '@style';
+import ArticlesList from '../../articles/components/articles-list';
 
 const Tab = createMaterialTopTabNavigator<TRootStackParamList>();
 
@@ -41,7 +41,7 @@ const homeScreenTabs: TTopNavigationItem[] = [
     tabName: 'Lessons',
     screenName: 'YogaLessonsScreen',
     icon: icons.lessonsHeader,
-    component: YogaLessonsScreen,
+    component: ArticlesList,
   },
 ];
 
