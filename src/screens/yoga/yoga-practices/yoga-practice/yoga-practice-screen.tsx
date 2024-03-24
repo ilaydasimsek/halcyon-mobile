@@ -46,13 +46,13 @@ const YogaPracticeScreen = () => {
       if (route.params.challengeId) {
         completeYogaChallengePracticeMutation({
           variables: {
-            challengeId: parseInt(route.params.challengeId, 10),
-            practiceId: parseInt(yogaPractice.id, 10),
+            challengeId: route.params.challengeId,
+            practiceId: yogaPractice.id,
           },
         });
       } else {
         completeYogaPracticeMutation({
-          variables: { id: parseInt(yogaPractice.id, 10) },
+          variables: { id: yogaPractice.id },
         });
       }
       navigation.replace('PracticeCompletionScreen');

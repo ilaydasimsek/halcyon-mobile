@@ -26,7 +26,7 @@ const YogaPracticeDetailsScreen = () => {
   const navigation = useNavigation();
   const { bottom } = useSafeAreaInsets();
   const { data, loading, error, refetch } = useYogaPractice({
-    id: parseInt(route.params.yogaPracticeId, 10),
+    id: route.params.yogaPracticeId,
   });
 
   if (loading) {
