@@ -1,26 +1,8 @@
 {
-  "extends": "@tsconfig/react-native/tsconfig.json",
+  "extends": "@react-native/typescript-config/tsconfig.json",
   "compilerOptions": {
-    /* Basic Options */
-    "target": "esnext",
-    "module": "commonjs",
-    "lib": [
-      "es2017"
-    ],
-    "allowJs": true,
-    "jsx": "react-native",
-    "noEmit": true,
-    "isolatedModules": true,
-    /* Strict Type-Checking Options */
-    "strict": true,
     "noImplicitAny": true,
     "strictNullChecks": true,
-    /* Module Resolution Options */
-    "moduleResolution": "node",
-    "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "resolveJsonModule": true,
     "baseUrl": ".",
     "paths": {
       "@components/buttons": [
