@@ -15,6 +15,7 @@ export const thumb = require('../../assets/icons/track-player/thumb-icon.png');
 export const completedChallenge = require('../../assets/icons/challenges/completed-icon.png');
 
 export const incompleteChallenge = require('../../assets/icons/challenges/not-completed-icon.png');
+export const readArticle = require('../../assets/icons/lesson/read-article-icon.png');
 
 export default {
   // Common icons
@@ -36,4 +37,6 @@ export default {
   // Challenges
   completedChallenge,
   incompleteChallenge,
+  // Lessons
+  readArticle,
 };
