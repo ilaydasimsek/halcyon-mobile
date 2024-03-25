@@ -69,6 +69,7 @@ node_modules
 # iOS / CocoaPods
 ios/build/
 ios/Pods/
+ios/.xcode.env.local
 
 # react-native-codegen
 /React/FBReactNativeSpec/FBReactNativeSpec
