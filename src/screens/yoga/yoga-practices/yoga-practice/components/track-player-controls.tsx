@@ -45,9 +45,9 @@ const TrackPlayerControls = ({
         />
         <IconButton
           image={
-            trackPlayerState === State.Playing
-              ? icons.trackPlayerPause
-              : icons.trackPlayerPlay
+            [State.Paused, State.Stopped].includes(trackPlayerState)
+              ? icons.trackPlayerPlay
+              : icons.trackPlayerPause
           }
           imageStyle={styles.trackPlayerPauseButtonIcon}
           style={styles.trackPlayerButton}
@@ -55,6 +55,7 @@ const TrackPlayerControls = ({
             switch (trackPlayerState) {
               case State.Paused:
               case State.Ready:
+              case State.Stopped:
                 onPlay();
                 break;
               case State.Playing:
