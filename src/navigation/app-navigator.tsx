@@ -20,6 +20,7 @@ import { HeaderBackButton } from '@react-navigation/elements';
 import YogaChallengesScreen from '../screens/yoga/yoga-challenges/all-yoga-challenges/yoga-challenges-screen';
 import YogaChallengeDetailsScreen from '../screens/yoga/yoga-challenges/yoga-challenge-details/yoga-challenge-details-screen';
 import PracticeCompletionScreen from '../screens/yoga/yoga-practices/practice-completion/practice-completion-screen';
+import YogaLessonDetailsScreen from '../screens/yoga-lessons/yoga-lesson-details-screen/yoga-lesson-details-screen';
 
 const Stack = createNativeStackNavigator<TRootStackParamList>();
 
@@ -103,6 +104,13 @@ const AppNavigator: React.FC = () => {
               headerShown: false,
             }}
             component={PracticeCompletionScreen}
+          />
+          <Stack.Screen
+            name="YogaLessonDetailsScreen"
+            options={{
+              title: '',
+            }}
+            component={YogaLessonDetailsScreen}
           />
         </>
       ) : (

@@ -1,6 +1,17 @@
 import React from 'react';
-import { StyleSheet, View, ActivityIndicator, Text } from 'react-native';
-import { useRoute, RouteProp, useNavigation } from '@react-navigation/native';
+import {
+  StyleSheet,
+  View,
+  ActivityIndicator,
+  Text,
+  ScrollView,
+} from 'react-native';
+import {
+  useRoute,
+  RouteProp,
+  useNavigation,
+  useFocusEffect,
+} from '@react-navigation/native';
 import { TRootStackParamList } from '@navigation';
 import { colors, scale, typography } from '@style';
 import { images } from '@constants';
@@ -31,6 +42,10 @@ const YogaChallengeDetailsScreen = () => {
   });
   const [startYogaChallengeMutation] = useStartYogaChallengeMutation();
 
+  useFocusEffect(() => {
+    refetch();
+  });
+
   if (loading) {
     return <ActivityIndicator />;
   }
@@ -60,26 +75,28 @@ const YogaChallengeDetailsScreen = () => {
       <Text style={[typography.p4, styles.body]}>
         {yogaChallenge.description}
       </Text>
-      {yogaChallenge.practices.map((practice) => (
-        <YogaPracticeListItem
-          key={practice.id}
-          yogaPractice={practice}
-          completed={completedChallengePractices.includes(practice.id)}
-          onPress={async () => {
-            if (!yogaChallenge.activeYogaChallenge) {
-              await startYogaChallengeMutation({
-                variables: {
-                  id: yogaChallenge.id,
-                },
+      <ScrollView showsVerticalScrollIndicator={false}>
+        {yogaChallenge.practices.map((practice) => (
+          <YogaPracticeListItem
+            key={practice.id}
+            yogaPractice={practice}
+            completed={completedChallengePractices.includes(practice.id)}
+            onPress={async () => {
+              if (!yogaChallenge.activeYogaChallenge) {
+                await startYogaChallengeMutation({
+                  variables: {
+                    id: yogaChallenge.id,
+                  },
+                });
+              }
+              navigation.navigate('YogaPracticeDetailsScreen', {
+                yogaPracticeId: practice.id,
+                challengeId: yogaChallenge.id,
               });
-            }
-            navigation.navigate('YogaPracticeDetailsScreen', {
-              yogaPracticeId: practice.id,
-              challengeId: yogaChallenge.id,
-            });
-          }}
-        />
-      ))}
+            }}
+          />
+        ))}
+      </ScrollView>
     </View>
   );
 };
