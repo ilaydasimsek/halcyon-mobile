@@ -4,9 +4,6 @@
 project (Like changing a common component, upgrading a package etc.), please explain why you did it and make sure you've
 tested all the affected places.>
 
-## Ticket
-
-https://heimatlas.atlassian.net/browse/MSNAP-#
 
 ## Checklist
 
