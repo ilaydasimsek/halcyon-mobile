@@ -23,7 +23,7 @@ const YogaChallengeDetailsScreen = () => {
   const route = useRoute<TYogaLessonDetailsScreenProps>();
 
   const { data, loading, error, refetch } = useYogaLesson({
-    id: parseInt(route.params.yogaLessonId, 10),
+    id: route.params.yogaLessonId,
   });
 
   useFocusEffect(() => {

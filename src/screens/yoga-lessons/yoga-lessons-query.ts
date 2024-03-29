@@ -38,7 +38,7 @@ export const YOGA_LESSONS_QUERY = gql`
 `;
 
 export const YOGA_LESSON_QUERY = gql`
-  query yogaLesson($id: Int!) {
+  query yogaLesson($id: String!) {
     yogaLesson(id: $id) {
       id
       title
@@ -74,7 +74,7 @@ export const useYogaLessons = ({
   });
 };
 
-export const useYogaLesson = ({ id }: { id: number }) => {
+export const useYogaLesson = ({ id }: { id: string }) => {
   return useQuery<{
     yogaLesson: TYogaLesson;
   }>(YOGA_LESSON_QUERY, {
