@@ -1,6 +1,11 @@
 import React from 'react';
 import { StyleSheet, View, Text, ActivityIndicator } from 'react-native';
-import { useRoute, RouteProp, useFocusEffect } from '@react-navigation/native';
+import {
+  useRoute,
+  RouteProp,
+  useFocusEffect,
+  useNavigation,
+} from '@react-navigation/native';
 import { TRootStackParamList } from '@navigation';
 import { colors, scale, typography } from '@style';
 import { BasicErrorView } from '@components/error';
@@ -20,6 +25,7 @@ type TYogaLessonDetailsScreenProps = RouteProp<
 >;
 
 const YogaChallengeDetailsScreen = () => {
+  const navigation = useNavigation();
   const route = useRoute<TYogaLessonDetailsScreenProps>();
 
   const { data, loading, error, refetch } = useYogaLesson({
@@ -61,7 +67,11 @@ const YogaChallengeDetailsScreen = () => {
                 key={step.id}
                 lessonStep={step}
                 completed={false}
-                onPress={() => {}}
+                onPress={() =>
+                  navigation.navigate('ArticleDetailsScreen', {
+                    articleId: step.article.id,
+                  })
+                }
               />
             );
           case 'YogaLessonPracticeStepNode':
