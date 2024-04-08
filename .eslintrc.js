@@ -14,7 +14,6 @@ module.exports = {
         'react-native/no-unused-styles': 2,
         'react-native/no-inline-styles': 2,
         'react-native/no-color-literals': 2,
-        'import/no-relative-parent-imports': 'error',
         'import/no-internal-modules': [
           'error',
           {
