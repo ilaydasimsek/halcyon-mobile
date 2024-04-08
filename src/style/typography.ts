@@ -7,6 +7,7 @@ const FONT_FAMILY = {
   poppinsSemiBold: 'Poppins-SemiBold',
   poppinsMedium: 'Poppins-Medium',
   poppinsBold: 'Poppins-Bold',
+  nunitoSansRegular: 'NunitoSans-Regular',
 };
 
 export const fontColor = StyleSheet.create({
@@ -24,65 +25,84 @@ export const fontColor = StyleSheet.create({
   },
 });
 
+export const fontFamily = StyleSheet.create({
+  primary: {
+    fontFamily: FONT_FAMILY.poppinsRegular,
+  },
+  primarySemiBold: {
+    fontFamily: FONT_FAMILY.poppinsSemiBold,
+  },
+  primaryMedium: {
+    fontFamily: FONT_FAMILY.poppinsMedium,
+  },
+  primaryBold: {
+    fontFamily: FONT_FAMILY.poppinsBold,
+  },
+  secondary: {
+    fontFamily: FONT_FAMILY.nunitoSansRegular,
+  },
+});
+
 export const typography = StyleSheet.create({
   h1: {
     fontSize: rem(30),
-    fontFamily: FONT_FAMILY.poppinsBold,
+    ...fontFamily.primaryBold,
     ...fontColor.textGray,
   },
   h2: {
     fontSize: rem(24),
-    fontFamily: FONT_FAMILY.poppinsMedium,
+    ...fontFamily.primaryMedium,
     ...fontColor.textGray,
   },
   h3: {
     fontSize: rem(21),
-    fontFamily: FONT_FAMILY.poppinsBold,
+    ...fontFamily.primaryBold,
     ...fontColor.textGray,
   },
   h4: {
     fontSize: rem(18),
-    fontFamily: FONT_FAMILY.poppinsBold,
+    ...fontFamily.primaryBold,
     ...fontColor.textGray,
   },
   h5: {
     fontSize: rem(16),
-    fontFamily: FONT_FAMILY.poppinsMedium,
+    ...fontFamily.primaryMedium,
     ...fontColor.textGray,
   },
   h6: {
     fontSize: rem(14),
-    fontFamily: FONT_FAMILY.poppinsMedium,
+    ...fontFamily.primaryMedium,
     ...fontColor.textGray,
   },
   h7: {
     fontSize: rem(8),
-    fontFamily: FONT_FAMILY.poppinsMedium,
+    ...fontFamily.primaryMedium,
     ...fontColor.textGray,
   },
   p1: {
     fontSize: rem(18),
-    fontFamily: FONT_FAMILY.poppinsRegular,
+    ...fontFamily.primary,
     ...fontColor.textGray,
   },
   p2: {
     fontSize: rem(16),
-    fontFamily: FONT_FAMILY.poppinsRegular,
+    lineHeight: 22,
+    ...fontFamily.primary,
     ...fontColor.textGray,
   },
   p3: {
     fontSize: rem(14),
-    fontFamily: FONT_FAMILY.poppinsRegular,
+    ...fontFamily.primary,
     ...fontColor.textGray,
   },
   p4: {
     fontSize: rem(12),
-    fontFamily: FONT_FAMILY.poppinsRegular,
+    ...fontFamily.primary,
     ...fontColor.textGrayH2,
   },
   p5: {
     fontSize: rem(10),
-    fontFamily: FONT_FAMILY.poppinsRegular,
+    ...fontFamily.primary,
     ...fontColor.textGray,
   },
 });

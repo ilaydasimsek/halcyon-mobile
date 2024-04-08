@@ -21,7 +21,7 @@ import YogaChallengesScreen from '../screens/yoga/yoga-challenges/all-yoga-chall
 import YogaChallengeDetailsScreen from '../screens/yoga/yoga-challenges/yoga-challenge-details/yoga-challenge-details-screen';
 import PracticeCompletionScreen from '../screens/yoga/yoga-practices/practice-completion/practice-completion-screen';
 import YogaLessonDetailsScreen from '../screens/yoga-lessons/yoga-lesson-details-screen/yoga-lesson-details-screen';
-import ArticleDetailsScreen from '../screens/yoga-lessons/articles-screen/article-details-screen';
+import ArticleDetailsScreen from '../screens/articles/article-details-screen/article-details-screen';
 
 const Stack = createNativeStackNavigator<TRootStackParamList>();
 

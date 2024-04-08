@@ -1,5 +1,5 @@
 import { gql, useQuery } from '@apollo/client';
-import { TArticle } from './model';
+import { TArticle } from './model.ts';
 
 const ARTICLE_QUERY = gql`
   query article($id: String!) {
