@@ -27,6 +27,7 @@ export const useArticles = ({ fetchFirst }: { fetchFirst?: number } = {}) => {
     variables: {
       first: fetchFirst,
     },
+    fetchPolicy: 'network-only',
     errorPolicy: 'all',
     notifyOnNetworkStatusChange: true,
   });

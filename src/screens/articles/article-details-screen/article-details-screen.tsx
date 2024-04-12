@@ -1,10 +1,10 @@
 import { RouteProp, useRoute } from '@react-navigation/native';
 import { TRootStackParamList } from '@navigation';
-import { ActivityIndicator, ScrollView, Text, StyleSheet } from 'react-native';
+import { ActivityIndicator, ScrollView, StyleSheet } from 'react-native';
 import { BasicErrorView } from '@components/error';
 import React from 'react';
 import ArticleContentItem from './components/article-content-item.tsx';
-import { typography, scale } from '@style';
+import { scale } from '@style';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useArticle } from '../article-query.ts';
 
@@ -39,7 +39,6 @@ const ArticleDetailsScreen = () => {
       contentContainerStyle={[styles.container, { paddingBottom: bottom }]}
       showsVerticalScrollIndicator={false}
     >
-      <Text style={[styles.header, typography.h3]}>{article.title}</Text>
       {article.contentItems.map((contentItem, index) => (
         <ArticleContentItem key={index} contentItem={contentItem} />
       ))}
@@ -50,9 +49,6 @@ const ArticleDetailsScreen = () => {
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: scale(20),
-  },
-  header: {
-    paddingVertical: scale(18),
   },
 });
 

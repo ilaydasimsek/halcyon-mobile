@@ -7,9 +7,17 @@ type TArticleImageContentItem = {
   imageUrl: string;
 };
 
+type TArticleHeaderContentItem = {
+  __typename: 'ArticleHeaderContentItemNode';
+  title: string;
+  subtitle: string;
+  image_url: string;
+};
+
 export type TArticleContentItem =
   | TArticleTextContentItem
-  | TArticleImageContentItem;
+  | TArticleImageContentItem
+  | TArticleHeaderContentItem;
 
 export type TArticle = {
   id: string;
