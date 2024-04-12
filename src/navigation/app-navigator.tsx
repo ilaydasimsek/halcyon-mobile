@@ -22,6 +22,7 @@ import YogaChallengeDetailsScreen from '../screens/yoga/yoga-challenges/yoga-cha
 import PracticeCompletionScreen from '../screens/yoga/yoga-practices/practice-completion/practice-completion-screen';
 import YogaLessonDetailsScreen from '../screens/yoga-lessons/yoga-lesson-details-screen/yoga-lesson-details-screen';
 import ArticleDetailsScreen from '../screens/articles/article-details-screen/article-details-screen';
+import AllArticlesScreen from '../screens/articles/all-articles-screen/all-articles-screen.tsx';
 
 const Stack = createNativeStackNavigator<TRootStackParamList>();
 
@@ -119,6 +120,13 @@ const AppNavigator: React.FC = () => {
               title: 'Article',
             }}
             component={ArticleDetailsScreen}
+          />
+          <Stack.Screen
+            name="AllArticlesScreen"
+            options={{
+              title: 'Articles',
+            }}
+            component={AllArticlesScreen}
           />
         </>
       ) : (

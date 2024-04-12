@@ -1,7 +1,7 @@
 import { TArticleContentItem } from 'src/screens/articles/model.ts';
-import { Text, StyleSheet } from 'react-native';
+import { StyleSheet, Text } from 'react-native';
 import FastImage from 'react-native-fast-image';
-import { scale, typography, fontFamily } from '@style';
+import { fontFamily, scale, typography } from '@style';
 import React from 'react';
 import { FastImageWithAutoHeight } from '@components/helper-views';
 
@@ -27,6 +27,10 @@ const ArticleContentItem = ({ contentItem }: TArticleContentItemProp) => {
           resizeMode={FastImage.resizeMode.cover}
         />
       );
+    case 'ArticleHeaderContentItemNode':
+      return (
+        <Text style={[styles.header, typography.h3]}>{contentItem.title}</Text>
+      );
   }
 };
 
@@ -39,6 +43,9 @@ const styles = StyleSheet.create({
     width: '100%',
     height: undefined,
     marginBottom: scale(20),
+  },
+  header: {
+    paddingVertical: scale(18),
   },
 });
 export default ArticleContentItem;
