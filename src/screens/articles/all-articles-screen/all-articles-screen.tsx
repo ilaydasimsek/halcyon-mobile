@@ -6,7 +6,7 @@ import { useArticles } from '../articles-query';
 import ArticleListItem from './components/article-list-item.tsx';
 import { BasicActivityIndicator } from '@components/helper-views';
 
-const PAGE_SIZE = 6;
+const PAGE_SIZE = 10;
 
 const AllArticlesScreen = () => {
   const { data, loading, fetchMore } = useArticles({ fetchFirst: PAGE_SIZE });

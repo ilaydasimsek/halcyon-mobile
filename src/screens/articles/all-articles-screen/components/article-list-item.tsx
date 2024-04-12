@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     marginVertical: 4,
     marginHorizontal: 12,
-    padding: 60,
+    padding: 24,
     flexDirection: 'row',
   },
   listItemBody: {
