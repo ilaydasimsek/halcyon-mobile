@@ -42,6 +42,7 @@ type TScreenList = {
   YogaLessonDetailsScreen: TYogaLessonDetailsScreen;
   ArticleDetailsScreen: TArticleDetailsScreen;
   AllArticlesScreen: undefined;
+  SettingsScreen: undefined;
 };
 
 type TRootStackParamList = {

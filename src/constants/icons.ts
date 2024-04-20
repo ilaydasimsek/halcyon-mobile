@@ -16,6 +16,7 @@ export const completedChallenge = require('../../assets/icons/challenges/complet
 
 export const incompleteChallenge = require('../../assets/icons/challenges/not-completed-icon.png');
 export const readArticle = require('../../assets/icons/lesson/read-article-icon.png');
+export const settings = require('../../assets/icons/common/settings.png');
 
 export default {
   // Common icons
@@ -23,6 +24,7 @@ export default {
   lessonsHeader,
   meditationHeader,
   yogaHeader,
+  settings,
   // Bottom navigation bar
   home,
   profile,
