@@ -21,9 +21,10 @@ import YogaChallengesScreen from '../screens/yoga/yoga-challenges/all-yoga-chall
 import YogaChallengeDetailsScreen from '../screens/yoga/yoga-challenges/yoga-challenge-details/yoga-challenge-details-screen';
 import PracticeCompletionScreen from '../screens/yoga/yoga-practices/practice-completion/practice-completion-screen';
 import YogaLessonDetailsScreen from '../screens/yoga-lessons/yoga-lesson-details-screen/yoga-lesson-details-screen';
-import ArticleDetailsScreen from '../screens/articles/article-details-screen/article-details-screen';
+import LessonArticleScreen from '../screens/articles/lesson-article-screen/lesson-article-screen.tsx';
 import AllArticlesScreen from '../screens/articles/all-articles-screen/all-articles-screen.tsx';
 import SettingsScreen from '../screens/settings/settings-screen.tsx';
+import SingleArticleScreen from '../screens/articles/single-article-screen/single-article-screen.tsx';
 
 const Stack = createNativeStackNavigator<TRootStackParamList>();
 
@@ -116,11 +117,18 @@ const AppNavigator: React.FC = () => {
             component={YogaLessonDetailsScreen}
           />
           <Stack.Screen
-            name="ArticleDetailsScreen"
+            name="LessonArticleScreen"
             options={{
               title: 'Article',
             }}
-            component={ArticleDetailsScreen}
+            component={LessonArticleScreen}
+          />
+          <Stack.Screen
+            name="SingleArticleScreen"
+            options={{
+              title: 'Article',
+            }}
+            component={SingleArticleScreen}
           />
           <Stack.Screen
             name="AllArticlesScreen"

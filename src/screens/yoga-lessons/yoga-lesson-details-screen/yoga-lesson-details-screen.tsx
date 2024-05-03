@@ -1,15 +1,18 @@
-import React from 'react';
-import { StyleSheet, View, Text, ActivityIndicator } from 'react-native';
+import React, { useCallback } from 'react';
+import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
 import {
-  useRoute,
   RouteProp,
   useFocusEffect,
   useNavigation,
+  useRoute,
 } from '@react-navigation/native';
 import { TRootStackParamList } from '@navigation';
 import { colors, scale, typography } from '@style';
 import { BasicErrorView } from '@components/error';
-import { useYogaLesson } from '../yoga-lessons-query';
+import {
+  useStartYogaLessonMutation,
+  useYogaLesson,
+} from '../yoga-lessons-query';
 import FastImage from 'react-native-fast-image';
 import { images } from '@constants';
 import ArticleListItem from './components/article-list-item';
@@ -31,6 +34,17 @@ const YogaChallengeDetailsScreen = () => {
   const { data, loading, error, refetch } = useYogaLesson({
     id: route.params.yogaLessonId,
   });
+  const [startYogaLessonMutation] = useStartYogaLessonMutation();
+
+  const startYogaLessonIfNeeded = useCallback(() => {
+    if (data?.yogaLesson && !data.yogaLesson.activeYogaLesson) {
+      startYogaLessonMutation({
+        variables: {
+          id: data.yogaLesson.id,
+        },
+      });
+    }
+  }, [data, startYogaLessonMutation]);
 
   useFocusEffect(() => {
     refetch();
@@ -45,6 +59,10 @@ const YogaChallengeDetailsScreen = () => {
   }
 
   const yogaLesson = data!.yogaLesson;
+  const completedArticleSteps =
+    yogaLesson.activeYogaLesson?.completedLessonSteps
+      .filter((step) => step.__typename === 'YogaLessonArticleStepNode')
+      .map((step) => step.id);
 
   return (
     <View style={styles.container}>
@@ -66,12 +84,14 @@ const YogaChallengeDetailsScreen = () => {
               <ArticleListItem
                 key={step.id}
                 lessonStep={step}
-                completed={false}
-                onPress={() =>
-                  navigation.navigate('ArticleDetailsScreen', {
-                    articleId: step.article.id,
-                  })
-                }
+                completed={completedArticleSteps?.includes(step.id) ?? false}
+                onPress={() => {
+                  startYogaLessonIfNeeded();
+                  navigation.navigate('LessonArticleScreen', {
+                    ...step,
+                    yogaLessonId: yogaLesson.id,
+                  });
+                }}
               />
             );
           case 'YogaLessonPracticeStepNode':

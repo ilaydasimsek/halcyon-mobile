@@ -1,4 +1,4 @@
-import { gql, useQuery } from '@apollo/client';
+import { gql, useMutation, useQuery } from '@apollo/client';
 import { RelayNode } from '../../common/types/graphql';
 import { TYogaLesson } from './model';
 
@@ -50,16 +50,55 @@ export const YOGA_LESSON_QUERY = gql`
         ...YogaLessonArticleFragment
         ...YogaLessonPracticeFragment
       }
+      activeYogaLesson {
+        yogaLesson {
+          id
+        }
+        completedLessonSteps {
+          __typename
+          ...YogaLessonArticleFragment
+          ...YogaLessonPracticeFragment
+        }
+      }
     }
   }
   ${YogaLessonPracticeFragment}
   ${YogaLessonArticleFragment}
 `;
 
+export const START_YOGA_LESSON_MUTATION = gql`
+  mutation startYogaLesson($id: String!) {
+    startYogaLesson(yogaLessonId: $id) {
+      ok
+    }
+  }
+`;
+
+export const COMPLETE_YOGA_LESSON_STEP_MUTATION = gql`
+  mutation completeYogaLessonStep($id: String!, $stepId: String!) {
+    completeYogaLessonStep(yogaLessonId: $id, yogaLessonStepId: $stepId) {
+      ok
+    }
+  }
+`;
+
 type TPartialYogaLesson = Pick<
   TYogaLesson,
   'id' | 'title' | 'description' | 'coverImageUrl'
 >;
+
+type TCompletionResponse = {
+  ok: boolean;
+};
+
+export type TStartYogaLessonMutationRequest = {
+  id: string;
+};
+
+export type TCompleteYogaLessonStepRequest = {
+  id: string;
+  stepId: string;
+};
 
 export const useYogaLessons = ({
   fetchFirst,
@@ -82,4 +121,18 @@ export const useYogaLesson = ({ id }: { id: string }) => {
       id: id,
     },
   });
+};
+
+export const useStartYogaLessonMutation = () => {
+  return useMutation<
+    { result: TCompletionResponse },
+    TStartYogaLessonMutationRequest
+  >(START_YOGA_LESSON_MUTATION);
+};
+
+export const useCompleteYogaLessonStepMutation = () => {
+  return useMutation<
+    { result: TCompletionResponse },
+    TCompleteYogaLessonStepRequest
+  >(COMPLETE_YOGA_LESSON_STEP_MUTATION);
 };

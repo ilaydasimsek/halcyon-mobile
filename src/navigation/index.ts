@@ -10,7 +10,8 @@ import { TYogaPracticeDetailsScreen } from '../screens/yoga/yoga-practices/yoga-
 import { TYogaPracticeResponse } from '../screens/yoga/yoga-practices/yoga-practice-query';
 import { TYogaChallengeDetailsScreen } from '../screens/yoga/yoga-challenges/yoga-challenge-details/yoga-challenge-details-screen';
 import { TYogaLessonDetailsScreen } from '../screens/yoga-lessons/yoga-lesson-details-screen/yoga-lesson-details-screen';
-import { TArticleDetailsScreen } from '../screens/articles/article-details-screen/article-details-screen';
+import { TLessonArticleScreen } from '../screens/articles/lesson-article-screen/lesson-article-screen.tsx';
+import { TSingleArticleScreen } from '../screens/articles/single-article-screen/single-article-screen.tsx';
 
 type TScreenList = {
   WelcomeScreen: undefined;
@@ -40,7 +41,8 @@ type TScreenList = {
   YogaChallengesScreen: undefined;
   PracticeCompletionScreen: undefined;
   YogaLessonDetailsScreen: TYogaLessonDetailsScreen;
-  ArticleDetailsScreen: TArticleDetailsScreen;
+  LessonArticleScreen: TLessonArticleScreen;
+  SingleArticleScreen: TSingleArticleScreen;
   AllArticlesScreen: undefined;
   SettingsScreen: undefined;
 };

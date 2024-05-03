@@ -18,6 +18,11 @@ export type TYogaLessonPracticeStep = TYogaLessonStep & {
   };
 };
 
+export type TActiveYogaLesson = {
+  id: string;
+  completedLessonSteps: (TYogaLessonArticleStep | TYogaLessonPracticeStep)[];
+};
+
 export type TYogaLesson = {
   id: string;
   title: string;
@@ -25,4 +30,5 @@ export type TYogaLesson = {
   description: string;
   coverImageUrl: string;
   steps: (TYogaLessonArticleStep | TYogaLessonPracticeStep)[];
+  activeYogaLesson: TActiveYogaLesson;
 };

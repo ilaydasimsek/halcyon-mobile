@@ -14,8 +14,8 @@ const ArticleListItem: React.FC<TArticleListItem> = ({ article }) => {
   return (
     <AnimatedButton
       onPress={() =>
-        navigation.navigate('YogaPracticeDetailsScreen', {
-          yogaPracticeId: article.id,
+        navigation.navigate('SingleArticleScreen', {
+          articleId: article.id,
         })
       }
     >
