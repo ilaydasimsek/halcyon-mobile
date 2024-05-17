@@ -12,6 +12,7 @@ import { TYogaChallengeDetailsScreen } from '../screens/yoga/yoga-challenges/yog
 import { TYogaLessonDetailsScreen } from '../screens/yoga-lessons/yoga-lesson-details-screen/yoga-lesson-details-screen';
 import { TLessonArticleScreen } from '../screens/articles/lesson-article-screen/lesson-article-screen.tsx';
 import { TSingleArticleScreen } from '../screens/articles/single-article-screen/single-article-screen.tsx';
+import { TYogaLessonPracticeScreen } from '../screens/yoga-lessons/yoga-lesson-practice-screen/yoga-lesson-practice-screen.tsx';
 
 type TScreenList = {
   WelcomeScreen: undefined;
@@ -38,6 +39,7 @@ type TScreenList = {
     yogaPractice: TYogaPracticeResponse;
     challengeId?: string;
   };
+  YogaLessonPracticeScreen: TYogaLessonPracticeScreen;
   YogaChallengesScreen: undefined;
   PracticeCompletionScreen: undefined;
   YogaLessonDetailsScreen: TYogaLessonDetailsScreen;

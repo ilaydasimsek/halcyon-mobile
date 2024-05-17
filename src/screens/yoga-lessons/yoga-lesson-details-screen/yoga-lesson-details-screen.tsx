@@ -63,6 +63,10 @@ const YogaChallengeDetailsScreen = () => {
     yogaLesson.activeYogaLesson?.completedLessonSteps
       .filter((step) => step.__typename === 'YogaLessonArticleStepNode')
       .map((step) => step.id);
+  const completedPracticeSteps =
+    yogaLesson.activeYogaLesson?.completedLessonSteps
+      .filter((step) => step.__typename === 'YogaLessonPracticeStepNode')
+      .map((step) => step.id);
 
   return (
     <View style={styles.container}>
@@ -99,8 +103,14 @@ const YogaChallengeDetailsScreen = () => {
               <PracticeListItem
                 key={step.id}
                 lessonStep={step}
-                completed={false}
-                onPress={() => {}}
+                completed={completedPracticeSteps?.includes(step.id) ?? false}
+                onPress={() => {
+                  startYogaLessonIfNeeded();
+                  navigation.navigate('YogaLessonPracticeScreen', {
+                    ...step,
+                    yogaLessonId: yogaLesson.id,
+                  });
+                }}
               />
             );
         }

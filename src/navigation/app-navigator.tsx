@@ -25,6 +25,7 @@ import LessonArticleScreen from '../screens/articles/lesson-article-screen/lesso
 import AllArticlesScreen from '../screens/articles/all-articles-screen/all-articles-screen.tsx';
 import SettingsScreen from '../screens/settings/settings-screen.tsx';
 import SingleArticleScreen from '../screens/articles/single-article-screen/single-article-screen.tsx';
+import YogaLessonPracticeScreen from '../screens/yoga-lessons/yoga-lesson-practice-screen/yoga-lesson-practice-screen.tsx';
 
 const Stack = createNativeStackNavigator<TRootStackParamList>();
 
@@ -136,6 +137,10 @@ const AppNavigator: React.FC = () => {
               title: 'Articles',
             }}
             component={AllArticlesScreen}
+          />
+          <Stack.Screen
+            name="YogaLessonPracticeScreen"
+            component={YogaLessonPracticeScreen}
           />
           <Stack.Screen
             name="SettingsScreen"
