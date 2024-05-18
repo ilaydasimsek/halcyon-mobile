@@ -1,6 +1,6 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { typography, colors } from '@style';
+import { StyleSheet, Text, View } from 'react-native';
+import { colors, typography } from '@style';
 import { AnimatedButton } from '@components/buttons';
 import { useNavigation } from '@react-navigation/native';
 import { TArticle } from '../../../articles/model.ts';
@@ -14,8 +14,8 @@ const ArticleListItem: React.FC<TArticleListItem> = ({ article }) => {
   return (
     <AnimatedButton
       onPress={() =>
-        navigation.navigate('YogaPracticeDetailsScreen', {
-          yogaPracticeId: article.id,
+        navigation.navigate('SingleArticleScreen', {
+          articleId: article.id,
         })
       }
     >

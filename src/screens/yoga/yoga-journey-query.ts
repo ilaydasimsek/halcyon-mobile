@@ -1,6 +1,7 @@
 import { gql, useQuery } from '@apollo/client';
 import { RelayNode } from '../../common/types/graphql';
-import { YogaPractice, YogaChallenge } from './model';
+import { YogaChallenge, YogaPractice } from './model';
+import { TYogaLesson } from '../yoga-lessons/model.ts';
 
 export const YOGA_JOURNEY_QUERY = gql`
   query yogaJourney {
@@ -25,6 +26,24 @@ export const YOGA_JOURNEY_QUERY = gql`
           }
         }
       }
+      activeYogaLessons {
+        edges {
+          node {
+            yogaLesson {
+              id
+              title
+              description
+              coverImageUrl
+              steps {
+                __typename
+              }
+            }
+            completedLessonSteps {
+              __typename
+            }
+          }
+        }
+      }
     }
   }
 `;
@@ -41,8 +60,23 @@ export type TActiveYogaChallengeNode = {
   completedYogaPractices: TYogaPracticeResponse[];
 };
 
+type TPartialYogaLessonStep = {
+  __typename: string;
+};
+
+type TYogaLessonResponse = Pick<
+  TYogaLesson,
+  'id' | 'title' | 'description' | 'coverImageUrl'
+> & { steps: TPartialYogaLessonStep[] };
+
+export type TActiveYogaLessonNode = {
+  yogaLesson: TYogaLessonResponse;
+  completedLessonSteps: TPartialYogaLessonStep[];
+};
+
 export type TYogaJourneyResponse = {
   activeYogaChallenges: RelayNode<TActiveYogaChallengeNode>;
+  activeYogaLessons: RelayNode<TActiveYogaLessonNode>;
 };
 
 export const useYogaJourney = () => {

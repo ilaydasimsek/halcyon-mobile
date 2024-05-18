@@ -3,21 +3,20 @@ import { TRootStackParamList } from '@navigation';
 import { ActivityIndicator, ScrollView, StyleSheet } from 'react-native';
 import { BasicErrorView } from '@components/error';
 import React from 'react';
-import ArticleContentItem from './components/article-content-item.tsx';
 import { scale } from '@style';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useArticle } from '../article-query.ts';
+import ArticleContentItem from '../lesson-article-screen/components/article-content-item.tsx';
 
-export type TArticleDetailsScreen = {
+export type TSingleArticleScreen = {
   articleId: string;
 };
 
 type TArticleDetailsScreenProps = RouteProp<
   TRootStackParamList,
-  'ArticleDetailsScreen'
+  'SingleArticleScreen'
 >;
-
-const ArticleDetailsScreen = () => {
+const SingleArticleScreen = () => {
   const route = useRoute<TArticleDetailsScreenProps>();
   const { bottom } = useSafeAreaInsets();
 
@@ -52,4 +51,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ArticleDetailsScreen;
+export default SingleArticleScreen;
