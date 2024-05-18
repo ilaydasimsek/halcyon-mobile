@@ -140,6 +140,12 @@ const AppNavigator: React.FC = () => {
           />
           <Stack.Screen
             name="YogaLessonPracticeScreen"
+            options={{
+              title: '',
+              headerStyle: {
+                backgroundColor: colors.white,
+              },
+            }}
             component={YogaLessonPracticeScreen}
           />
           <Stack.Screen

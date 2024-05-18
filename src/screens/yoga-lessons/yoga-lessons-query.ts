@@ -2,7 +2,7 @@ import { gql, useMutation, useQuery } from '@apollo/client';
 import { RelayNode } from '../../common/types/graphql';
 import { TYogaLesson } from './model';
 
-const YogaLessonPracticeFragment = gql`
+export const YogaLessonPracticeFragment = gql`
   fragment YogaLessonPracticeFragment on YogaLessonPracticeStepNode {
     id
     yogaPractice {
@@ -12,7 +12,7 @@ const YogaLessonPracticeFragment = gql`
   }
 `;
 
-const YogaLessonArticleFragment = gql`
+export const YogaLessonArticleFragment = gql`
   fragment YogaLessonArticleFragment on YogaLessonArticleStepNode {
     id
     article {
